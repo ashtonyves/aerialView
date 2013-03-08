@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<characters>
+ <!-- <actor>
+    <name>MSB label</name>
+    <label>shown in GUI</label>
+    <pos>16float transform</pos>
+      <state>
+        <frame></frame>
+        <pos></pos>
+      </state>
+      <state>
+        <frame></frame>
+        <pos></pos>
+      </state>
+      <state>
+        <frame></frame>
+        <pos></pos>
+      </state>
+      <state>
+        <frame></frame>
+        <pos></pos>
+      </state>
+  </actor> -->
+  <actor>
+    <name>Actor1</name>
+    <label>Romeo</name>
+    <state>
+      <frame>0</frame>
+      <pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
+    </state>
+  </actor>
+</characters>
+
+<lights>
+  <!--
+  <actor>
+    <name>MSB name<name>
+    <label>Appears in GUI</label>
+    <state>
+      <frame>int</frame>
+      <transform>16float transform</transform>
+      <bon>boolean lightsOn</bon> 
+    </state>
+    <state>
+      <frame></frame>
+      <on></on>
+      <pos</pos> 
+    </state>
+  </actor> -->
+  <actor>
+    <name>Light1<name>
+    <label>Dramatic Stairwell</label>
+    <state>
+      <frame>56</frame>
+      <transform>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</transform>
+      <bon>true</bon> 
+    </state>
+    <state>
+      <frame>139</frame>
+      <on>true</on>
+      <pos>0.2f 0.0f 0.5f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos> 
+    </state>
+  </actor>
+  <actor>
+  </actor>
+</lights>
+
+<events>
+  <!--
+  <event>
+      <label>displayed in Processing</label>
+      <duration>
+        <start>int frame</start>
+        <end>int frame</end>
+      </duration>
+      <relevence>[1-5]</relevence>
+      <actors>
+        <name>MSB character name<name>
+        <name>MSB character name</name>
+      <actors>
+    </event>  -->
+  <event>
+    <label>Run to door</label>
+    <duration>
+      <start>0</start>
+      <end>34</end>
+    </duration>
+    <relevence>3</relevence>
+    <actors>
+      <name>Actor1<name>
+      <name>Actor2</name>
+    <actors>
+  </event>
+</events>
