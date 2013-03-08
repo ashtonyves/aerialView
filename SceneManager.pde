@@ -43,6 +43,39 @@ public class SceneManager {
   void initActors(XML[] data) {
    // populate arrayList of all Actors from XML
    actors = new ArrayList<Actor>();
+     
+    // for each Actor in the array
+    for ( int i=0; i < data.length; i ++) {
+      XML node = data[i];
+      
+      // create a new Event object
+      Actor a = new Actor();
+   
+     // add attributes to object
+      a.setName(node.getChild("name").getContent());
+      a.setLabel(node.getChild("label").getContent());
+      
+      for(int j=0; j < node.getChildren("state").length; j ++) {
+        XML[] stateNode = node.getChildren("state");
+        
+        // store grame and matrix for this state in temporary variables
+        int frame = stateNode[j].getInt("frame");
+        String transform = stateNode[j].getChild("pos").getContent();
+        // TODO: read in String transform, turn it into a float array and replace this with testFloat
+        float[] testFloat = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 240.0f, 000.0f, -350.0f, 1f};
+        
+        // create a new state and add it to the Actor
+         a.addState(frame, testFloat);
+        
+
+        println("Actor: " + a.getName() + " at Frame " + frame);
+        
+        //a.addState(
+      }
+    }
+       
+      
+      
   }
   
   void initEvents(XML[] data) { 
