@@ -60,17 +60,15 @@ public class SceneManager {
         
         // store grame and matrix for this state in temporary variables
         int frame = stateNode[j].getInt("frame");
-        String transform = stateNode[j].getChild("pos").getContent();
+        String stringPosition = stateNode[j].getChild("pos").getContent(); 
+        String[] floatString = stringPosition.split(" ");
+        float[] transform = new float[floatString.length];
         // TODO: read in String transform, turn it into a float array and replace this with testFloat
-        float[] testFloat = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 240.0f, 000.0f, -350.0f, 1f};
+        
         
         // create a new state and add it to the Actor
-         a.addState(frame, testFloat);
-        
+         a.addState(frame, transform);
 
-        println("Actor: " + a.getName() + " at Frame " + frame);
-        
-        //a.addState(
       }
     }
        
@@ -94,9 +92,15 @@ public class SceneManager {
       e.setEndFrame(node.getChild("duration").getInt("end"));
       e.setRelevence(int(node.getChild("relevence").getContent()));
       e.setLabel(node.getChild("label").getContent());
-      // todo: set actors
-      
-      // add object to array
+       for(int j=0; j < node.getChildren("actors").length; j ++) {
+        XML[] actorsNode = node.getChildren("actors");
+        // store actor name in temp var
+        String actorName = actorsNode[j].getContent();
+        // add the string to the Event's actors array
+        e.setActor(actorName);
+       }
+       
+      // add Event to array
       events.add(e);
     }   
   }

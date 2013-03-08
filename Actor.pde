@@ -63,6 +63,7 @@ public class Actor {
  public void addState(int frame, float[] transform) {
     ActorState state = new ActorState(frame, transform);
    _states.add(state);
+   println("New state added for " + this.getName() + " at Frame " + frame + " with transform " + transform);
  }
   
   

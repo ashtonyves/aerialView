@@ -14,10 +14,12 @@ public class Event {
   int _startFrame;
   int _endFrame;
   int _relevence;
-  ArrayList<Actor> _actors;
+  ArrayList<String> _actors;
   
    //---------------------CONSTRUCTORS---------------------------------
- public Event(String label, int start, int end, int rel, ArrayList<Actor> actors) {
+ public Event(String label, int start, int end, int rel, ArrayList<String> actors) {
+  
+    _actors = new ArrayList<String>();
    _label = label;
    _startFrame = start;
    _endFrame = end;
@@ -25,7 +27,9 @@ public class Event {
    _actors = actors;
  }
  
- public Event() {}
+ public Event() {
+   _actors = new ArrayList<String>();
+ }
  
  
  //------------------------------------------------------
@@ -69,16 +73,16 @@ public class Event {
  }
  
  //------------------------------------------------------
- public void setActor(Actor actor) {
-   _actors.add(actor);
+ public void setActor(String name) {
+       _actors.add(name);
+       println("Actor added to Event " + _label + ": " + _actors.get(_actors.size()-1)); 
+   
  }
  
  //------------------------------------------------------
- public Actor getActor(Actor actor) {
-   for (int i = 0; i < _actors.size(); i++) {
-    if(_actors.get(i).getName() == actor.getName()) {
-       return _actors.get(i);
-    }
+ public ArrayList<String> getActors() {
+   if(_actors.size() > 0) {
+      return _actors;
    }
    return null;
  }
