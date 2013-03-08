@@ -4,12 +4,14 @@
 * holds position, start time
 * Methods to draw timeline icons and aerial displays based on flags.
 * 
+* Getters, setters to retrieve, edit values
 * 
 **/
 import java.nio.FloatBuffer;
-
+ 
 public class Camera {
-  FloatBuffer  _transform; //http://docs.oracle.com/javase/1.5.0/docs/api/java/nio/FloatBuffer.html
+  String       _name;       // MSB name (may be superfluous here)
+  FloatBuffer  _transform;   //http://docs.oracle.com/javase/1.5.0/docs/api/java/nio/FloatBuffer.html
   int          _startFrame;
   
   boolean _isSelectedForPositionInSpace;
@@ -17,9 +19,7 @@ public class Camera {
   boolean _isActive;
   boolean _isViolating;
   
-  
   //----------CONSTRUCTOR--------------------------------------------
-  // adds a new Camera
   public Camera(float[] transform, int startFrame) {
     
     // pass in the raw matrix to the camera object
@@ -79,17 +79,32 @@ public class Camera {
   public void setViolated() {
     
   }
+   
+   
+   
+   
+   //-----------------GETTERS/ SETTERS-------------------------------------
+   public String getName() {
+     return _name;
+   }
   //------------------------------------------------------
-  public Camera getCamera() {
-    return this;
+  public void setName(String name) {
+    _name = name;
   }
-  
   //------------------------------------------------------
-  
-    
-  
+   public int getStartFrame() {
+     return _startFrame;
+   }
   //------------------------------------------------------
-  
-  
-  //------------------------------------------------------
+  public void setStartFrame(int start) {
+    _startFrame = start;
+  }
+ //------------------------------------------------------
+  public void setPosition(float[] transform) {
+   _transform.wrap(transform);
+  }
+ //------------------------------------------------------
+  public FloatBuffer getPosition() {
+   return _transform;
+  }
 }

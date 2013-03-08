@@ -14,7 +14,7 @@ public final int maxFrames = 3000;
 
   //------------------------------------------------------
 void setup() {
-  
+
   // draw environment
   background(bg);
   size(displayWidth, displayHeight);
