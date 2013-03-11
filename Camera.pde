@@ -28,55 +28,6 @@ public class Camera {
     _states = new ArrayList<CameraState>();
   }
   
-  // TODO: call drawCamera for those three cameras in draw() function;
-  //------------------------------------------------------
-  void drawCamera(FloatBuffer transform, int frame) {
-    
-    // icon on the timeline
-    drawCameraOnTimeline(frame);
-    // object in the schematic
-    drawCameraInScene(transform);
-  }
-  
-  //------------------------------------------------------
-  void drawCameraOnTimeline(int frame) {
-    
-    // map the frame to the length of the timeline
-    //  Probably better ways to do this using the Timeline object
-    float xPos = map((float)frame, 0, maxFrames, 40, displayWidth - 2*40); 
-    
-    // draw line
-    
-    line(xPos, displayHeight - 140, xPos, displayHeight-60);
-}
-  //------------------------------------------------------
-  void drawCameraInScene(FloatBuffer transform) {
-    
-    // select the SVG depending on its status
-    
-    // and transform it
-  }
-  
-  // Change the appearance of the icon based on its status
-  //------------------------------------------------------
-  public void setSelectedForPositionChange(boolean val) {
- 
-  }
-  //------------------------------------------------------
-  public void setSelectedForTimeChange() {
-    
-  }
-  //------------------------------------------------------
-  public void setActive() {
-    
-  } 
-  //------------------------------------------------------
-  public void setViolated() {
-    
-  }
-   
-   
-   
    
    //-----------------GETTERS/ SETTERS-------------------------------------
    public String getName() {
@@ -106,6 +57,60 @@ public FloatBuffer getPositionForState(int i) {
   return _states.get(i).getPosition();
    
 } 
+
+  /*****************************************************************
+    VISUALIZE OBJECT ON SCREEN 
+  *****************************************************************/
+  //------------------------------------------------------
+  void drawCamera() {
+    
+    for( int i = 0; i< this.getStates().size(); i++) {
+      // icon on the timeline
+      drawCameraOnTimeline(getFrameForState(i));
+      // object in the schematic
+      drawCameraInScene(getPositionForState(i));
+    }
+  }
+  
+  //------------------------------------------------------
+  void drawCameraOnTimeline(int frame) {
+    // map the frame to the length of the timeline
+    //  Probably better ways to do this using the Timeline object
+    float xPos = map((float)frame, 0, maxFrames, 40, displayWidth - 2*40); 
+    
+    // draw line
+    line(xPos, displayHeight - 140, xPos, displayHeight-60);
+    
+}
+  //------------------------------------------------------
+  void drawCameraInScene(FloatBuffer pos) {
+    
+    // select the SVG depending on its status
+    
+    // and transform it
+  }
+  
+  // Change the appearance of the icon based on its status
+  //------------------------------------------------------
+  public void setSelectedForPositionChange(boolean val) {
+ 
+  }
+  //------------------------------------------------------
+  public void setSelectedForTimeChange() {
+    
+  }
+  //------------------------------------------------------
+  public void setActive() {
+    
+  } 
+  //------------------------------------------------------
+  public void setViolated() {
+    
+  }
+
+
+
+
   
   
    /*****************************************************************

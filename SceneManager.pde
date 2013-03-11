@@ -72,6 +72,8 @@ public class SceneManager {
          a.addState(frame, transform);
       }
       
+      // Add Actor to actors array
+      actors.add(a);
       
       // TESTING
       println(" ");
@@ -111,7 +113,7 @@ public class SceneManager {
         e.setActor(actorName);
        }
        
-      // add Event to array
+      // add Event to events array
       events.add(e);
       
      // TESTING 
@@ -155,7 +157,8 @@ public class SceneManager {
         // create a new state and add it to the Actor
          l.addState(frame, transform, on);
       }
-      
+      // add the light to the lights array
+      lights.add(l);
       
       // TESTING
       println(" ");
@@ -196,6 +199,8 @@ public class SceneManager {
         // create a new state and add it to the Actor
          c.addState(frame, transform);
       }
+      // add the camera to the cameras array
+      cameras.add(c);
       
        // TESTING
       println(" ");
@@ -244,7 +249,12 @@ public class SceneManager {
      // draw it to the stage
 
    // for each camera in the array
-     // place it on the timeline
+   for (int i = 0; i < cameras.size(); i++) {
+     // draw it on the timeline and in the scene
+     cameras.get(i).drawCamera();
+     
+   }
+     
 
   }
   

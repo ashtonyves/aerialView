@@ -27,12 +27,12 @@ void setup() {
   // draw the timeline
   timeline = new Timeline();
   
-  // draw the scene from SceneManager data
-  manager.drawScene();
+  
 }
 
   //------------------------------------------------------
 void draw() {
- 
+ // draw the scene from SceneManager data
+  manager.drawScene();
   
 }
