@@ -21,7 +21,7 @@
 			<name>Light1</name>
 			<label>Dramatic Stairwell</label>
 			<state frame="56" on="true">
-				<transform>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</transform>
+				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
 			</state>
 			<state frame="139" on="true">
 				<pos>0.2f 0.0f 0.5f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos> 

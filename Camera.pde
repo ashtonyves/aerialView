@@ -11,8 +11,7 @@ import java.nio.FloatBuffer;
  
 public class Camera {
   String       _name;       // MSB name (may be superfluous here)
-  FloatBuffer  _transform;   //http://docs.oracle.com/javase/1.5.0/docs/api/java/nio/FloatBuffer.html
-  int          _startFrame;
+  ArrayList<CameraState> _states;
   
   boolean _isSelectedForPositionInSpace;
   boolean _isSelectedForPositionInTime;
@@ -20,17 +19,13 @@ public class Camera {
   boolean _isViolating;
   
   //----------CONSTRUCTOR--------------------------------------------
-  public Camera(float[] transform, int startFrame) {
-    
-    // pass in the raw matrix to the camera object
-    _transform = FloatBuffer.allocate(16);
-    _transform.wrap(transform);
-    
-    // set the startFrame
-    _startFrame = startFrame;
-    
-    //draw the camera to the scene
-    drawCamera(_transform, _startFrame);
+  public Camera(ArrayList<CameraState> states) {
+    _states = new ArrayList<CameraState>();
+    _states = states;
+  }
+  
+  public Camera() {
+    _states = new ArrayList<CameraState>();
   }
   
   // TODO: call drawCamera for those three cameras in draw() function;
@@ -91,20 +86,66 @@ public class Camera {
   public void setName(String name) {
     _name = name;
   }
+ 
   //------------------------------------------------------
-   public int getStartFrame() {
-     return _startFrame;
+  public void addState(int frame, float[] transform) {
+    CameraState state = new CameraState(frame, transform);
+   _states.add(state);
+ }
+ //------------------------------------------------------
+ public ArrayList<CameraState> getStates() {
+   return _states;
+ }
+ 
+ //------------------------------------------------------
+ public int getFrameForState(int i) {
+   return _states.get(i).getFrame();
+ }
+ //------------------------------------------------------
+public FloatBuffer getPositionForState(int i) { 
+  return _states.get(i).getPosition();
+   
+} 
+  
+  
+   /*****************************************************************
+    INNER CLASS TO MANAGE STATE CHANGES (position at frames) 
+  *****************************************************************/
+ public class CameraState{
+   
+   int _frame;
+   FloatBuffer _transform;
+  
+  //--------------------CONSTRUCTOR ----------------------------------
+   public CameraState(int frame, float[] transform) {
+     
+     _transform = FloatBuffer.allocate(16);
+     _transform.put(transform);
+     
+     _frame = frame;
    }
-  //------------------------------------------------------
-  public void setStartFrame(int start) {
-    _startFrame = start;
-  }
- //------------------------------------------------------
-  public void setPosition(float[] transform) {
-   _transform.wrap(transform);
-  }
- //------------------------------------------------------
-  public FloatBuffer getPosition() {
-   return _transform;
-  }
+   
+   public CameraState() {
+   }
+   
+   //--------------------GETTERS/SETTERS----------------------------------
+   public void setPosition(float[] transform) {
+     _transform.put(transform);
+   }
+   //------------------------------------------------------
+   public FloatBuffer getPosition() {
+     return _transform;
+   }
+   //------------------------------------------------------
+   public int getFrame() {
+     return _frame;
+   }
+   //------------------------------------------------------
+   public void setFrame(int frame) {
+    _frame = frame; 
+   }
+ 
+ }
+ 
+ 
 }

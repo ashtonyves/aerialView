@@ -11,21 +11,20 @@ public class Light {
  
   String _name;
   String _label;
-  FloatBuffer _transform;
-  boolean _bOn;
+  ArrayList<LightState> _states;
   
    //-----------------CONSTRUCTOR-------------------------------------
- public Light(String name, String label, float[] transform, boolean on) {
-   
-   _transform = FloatBuffer.allocate(16);
-   _transform.wrap(transform);
-   
+ public Light(String name, String label, ArrayList<LightState> states) {
    _name = name;
    _label = label;
-   _bOn = on;
+   _states = new ArrayList<LightState>();
+   _states = states;
  }
  
- 
+ public Light() {
+   _states = new ArrayList<LightState>();
+ }
+
   //-----------------GETTERS/ SETTERS-------------------------------------
  public String getName() {
     return _name;
@@ -43,23 +42,77 @@ public class Light {
     _label = label;
  }
  //------------------------------------------------------
- public void setPosition(float[] transform) {
-   _transform.wrap(transform);
+ public void addState(int frame, float[] transform, String on) {
+    LightState state = new LightState(frame, transform, on);
+   _states.add(state);
  }
  //------------------------------------------------------
- public FloatBuffer getPosition() {
-   return _transform;
+ public ArrayList<LightState> getStates() {
+   return _states;
+ }
+ //------------------------------------------------------
+ public int getFrameForState(int i) {
+   return _states.get(i).getFrame();
+ }
+ //------------------------------------------------------
+public FloatBuffer getPositionForState(int i) {
+   return _states.get(i).getPosition();
+} 
+  //------------------------------------------------------
+public String getOnForState(int i) {
+   return _states.get(i).getOn();
+} 
+
+  /*****************************************************************
+    INNER CLASS TO MANAGE STATE CHANGES (position at frames) 
+  *****************************************************************/
+ public class LightState{
+   
+   int _frame;
+   String _on;
+   FloatBuffer _transform;
+  
+  //--------------------CONSTRUCTOR ----------------------------------
+   public LightState(int frame, float[] transform, String on) {
+     
+     _transform = FloatBuffer.allocate(16);
+     _transform.put(transform);
+     
+     _on = on;
+     
+     _frame = frame;
+   }
+   
+   public LightState() {
+   }
+   
+   //--------------------GETTERS/SETTERS----------------------------------
+   public void setPosition(float[] transform) {
+     _transform.put(transform);
+   }
+   //------------------------------------------------------
+   public FloatBuffer getPosition() {
+     return _transform;
+   }
+   //------------------------------------------------------
+   public int getFrame() {
+     return _frame;
+   }
+   //------------------------------------------------------
+   public void setFrame(int frame) {
+    _frame = frame; 
+   }
+    //------------------------------------------------------
+   public String getOn() {
+     return _on;
+   }
+   //------------------------------------------------------
+   public void setOn(String on) {
+    _on = on; 
+   }
+ 
  }
  
- // a little different...
- //------------------------------------------------------
- public void turnOn() {
-   _bOn = true;
- }
- //------------------------------------------------------
- public void turnOff() {
-   _bOn = false;
- }
 }
 
 

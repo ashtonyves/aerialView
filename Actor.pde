@@ -12,7 +12,7 @@ public class Actor {
  
   String _name;
   String _label;
-  FloatBuffer _currentTransform;
+  FloatBuffer _currentPosition;
   
   ArrayList<ActorState> _states;
   
@@ -53,19 +53,30 @@ public class Actor {
  }
  //------------------------------------------------------
  public void setPosition(float[] transform) {
-   _currentTransform.wrap(transform);
+   _currentPosition.wrap(transform);
  }
  //------------------------------------------------------
  public FloatBuffer getPosition() {
-   return _currentTransform;
+   return _currentPosition;
  }
  //------------------------------------------------------
  public void addState(int frame, float[] transform) {
     ActorState state = new ActorState(frame, transform);
    _states.add(state);
-   println("New state added for " + this.getName() + " at Frame " + frame + " with transform " + transform);
  }
-  
+ //------------------------------------------------------
+ public ArrayList<ActorState> getStates() {
+   return _states;
+ }
+ 
+ //------------------------------------------------------
+ public int getFrameForState(int i) {
+   return _states.get(i).getFrame();
+ }
+ //------------------------------------------------------
+public FloatBuffer getPositionForState(int i) {
+   return _states.get(i).getPosition();
+} 
   
   /*****************************************************************
     INNER CLASS TO MANAGE STATE CHANGES (position at frames) 
@@ -77,8 +88,10 @@ public class Actor {
   
   //--------------------CONSTRUCTOR ----------------------------------
    public ActorState(int frame, float[] transform) {
+     
      _transform = FloatBuffer.allocate(16);
-     _transform.wrap(transform);
+     _transform.put(transform);
+     
      _frame = frame;
    }
    
@@ -87,7 +100,7 @@ public class Actor {
    
    //--------------------GETTERS/SETTERS----------------------------------
    public void setPosition(float[] transform) {
-     _transform.wrap(transform);
+     _transform.put(transform);
    }
    //------------------------------------------------------
    public FloatBuffer getPosition() {

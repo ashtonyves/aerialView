@@ -75,7 +75,7 @@ public class Event {
  //------------------------------------------------------
  public void setActor(String name) {
        _actors.add(name);
-       println("Actor added to Event " + _label + ": " + _actors.get(_actors.size()-1)); 
+      // println("Actor added to Event " + _label + ": " + _actors.get(_actors.size()-1)); 
    
  }
  
