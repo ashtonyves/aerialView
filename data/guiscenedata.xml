@@ -35,7 +35,47 @@
 			<duration start="0" end="34" />
 			<relevence>3</relevence>
 			<actors>
+				<name>Actor2</name>
+			</actors>
+		</node>
+		<node>
+			<label>Begin Singing</label>
+			<duration start="10" end="48" />
+			<relevence>2</relevence>
+			<actors>
 				<name>Actor1</name>
+			</actors>
+		</node>
+		<node>
+			<label>Jump Out Window</label>
+			<duration start="50" end="55" />
+			<relevence>1</relevence>
+			<actors>
+				<name>Actor2</name>
+			</actors>
+		</node>
+		<node>
+			<label>Fall to Ground</label>
+			<duration start="55" end="80" />
+			<relevence>2</relevence>
+			<actors>
+				<name>Actor2</name>
+			</actors>
+		</node>
+		<node>
+			<label>Catch Princess</label>
+			<duration start="80" end="90" />
+			<relevence>1</relevence>
+			<actors>
+				<name>Actor1</name>
+				<name>Actor2</name>
+			</actors>
+		</node>
+		<node>
+			<label>Faint</label>
+			<duration start="90" end="95" />
+			<relevence>4</relevence>
+			<actors>
 				<name>Actor2</name>
 			</actors>
 		</node>

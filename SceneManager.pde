@@ -7,18 +7,11 @@ public class SceneManager {
   ArrayList<Actor> actors;
   ArrayList<Light> lights;
   ArrayList<Event> events;
-
-  // environment dimensions
-  int trackHeight = 30;
-  int trackAreaXPos = 40;
-  int trackAreaYPos = 350;
-  
-  // tracks for events and lights
-  int numLightTracks = 2;
-  int numEventTracks = 4;
   
   // initialization values
   int activeCam = 0; // start active camera as the first one in the array
+  
+  Timeline t = new Timeline();
 
    //----------CONSTRUCTOR-------------------------------------------- 
   SceneManager() {
@@ -221,26 +214,20 @@ public class SceneManager {
   /*****************************************************************
    --------------------------- DRAW TO THE SCENE ----------------- 
   *****************************************************************/
-  void drawScene() {
-    
-    // draw EVENT area
-    for(int i=0; i<numEventTracks; i++) {
-      rect(trackAreaXPos, 
-        (displayHeight - trackAreaYPos) + (i*trackHeight) + (numLightTracks * trackHeight),  
-        displayWidth - (2*trackAreaXPos), 
-        trackHeight);
-    }
-
-    // draw LIGHTS area
-    for(int i=0; i<numLightTracks; i++) {
-      rect(trackAreaXPos, 
-        (displayHeight - trackAreaYPos) + (i*trackHeight), 
-        displayWidth - (2*trackAreaXPos), 
-        trackHeight);
-    }
+  public void drawScene() {
     
     // for each event in the array 
       // draw event on the timeline
+      for (int i = 0; i < events.size(); i++ ) {
+        Event e = events.get(i);
+        e.draw(
+          timeline.getX(), // map this value
+          (displayHeight - t.getTrackYPos()) + ((e.getRelevence() - 1)*(5+t.getTrackHeight())),  
+          80, 
+          t.getTrackHeight()); 
+          
+          
+      };
     
     // for each light in the array 
       // draw light on the timeline
@@ -257,6 +244,7 @@ public class SceneManager {
      
 
   }
+  
   
   
   

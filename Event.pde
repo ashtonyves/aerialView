@@ -29,12 +29,15 @@ public class Event {
  
  public Event() {
    _actors = new ArrayList<String>();
+
  }
  
  
  //------------------------------------------------------
- public void drawEvent() {
-   //TODO
+ public void draw(int x, int y, int width, int height) {
+   // put text in rectangle
+   fill(240,240,39);
+   rect(x, y, width, height);
  }
  
  

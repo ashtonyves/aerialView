@@ -26,13 +26,12 @@ void setup() {
   
   // draw the timeline
   timeline = new Timeline();
-  
-  
+  timeline.drawTracks();
+ 
 }
 
   //------------------------------------------------------
 void draw() {
  // draw the scene from SceneManager data
   manager.drawScene();
-  
 }
