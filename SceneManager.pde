@@ -11,8 +11,6 @@ public class SceneManager {
   // initialization values
   int activeCam = 0; // start active camera as the first one in the array
   
-  // Timeline t = new Timeline();
-
    //----------CONSTRUCTOR-------------------------------------------- 
   SceneManager() {
    initScene();
@@ -35,7 +33,7 @@ public class SceneManager {
   }
   
    /*****************************************************************
-   ----------------- POPULATE OBJECTS FROM XML DATA ----------------- 
+   ----------------- LOAD OBJECTS FROM XML DATA ----------------- 
   *****************************************************************/
   
   void initActors(XML[] data) {
@@ -215,7 +213,7 @@ public class SceneManager {
    --------------------------- DRAW TO THE SCENE ----------------- 
   *****************************************************************/
   public void drawScene() {
-    
+
     // for each event in the array 
       // draw event on the timeline
       for (int i = 0; i < events.size(); i++ ) {
@@ -228,22 +226,22 @@ public class SceneManager {
   
    // for each actor in the array
      // draw it to the stage
+   for (int i = 0; i < actors.size(); i++) {
+     // draw it on the timeline and in the scene
+     Actor a = actors.get(i);
+     a.draw();
+   }
 
    // for each camera in the array
    for (int i = 0; i < cameras.size(); i++) {
      // draw it on the timeline and in the scene
-     cameras.get(i).drawCamera();
-     
+     Camera c = cameras.get(i);
+     c.draw();
    }
+   
      
 
   }
-  
-  
-  
-  
-  
-  
   
   
   /******************************************

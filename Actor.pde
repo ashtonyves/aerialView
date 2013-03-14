@@ -16,6 +16,11 @@ public class Actor {
   
   ArrayList<ActorState> _states;
   
+  float fov = 45;
+  
+  PShape icon;
+  
+  
  //----------CONSTRUCTORS--------------------------------------------
  public Actor(String name, String label, ArrayList<ActorState> states) {
    
@@ -24,15 +29,50 @@ public class Actor {
    _label = label;
    _states = states;
    
+   icon  = loadShape("actor.svg");
+   
  }
  
  public Actor(){
    _states = new ArrayList<ActorState>();
+   icon  = loadShape("actor.svg");
  }
  
- 
- public void drawActor() {
-  // TODO 
+ // call after you update CURRENTFRAME
+ public void draw() {
+   
+   ActorState currentState = null; 
+   // loop through all _states.
+   for (int i = 0; i < _states.size(); i ++) {
+    ActorState s = _states.get(i);
+     // compare each frame value to current frame
+    if (s.getFrame() < CURRENTFRAME) {
+      // if it is less that the current frame, save it to the current state
+       currentState = s;
+    } else {
+      if(CURRENTFRAME == 0) {
+        currentState = _states.get(0);
+      }
+      // we have the right state saved to currentState from the previous iteration
+      // so draw the character from this state
+      FloatBuffer fb = currentState.getPosition();
+      float[] thisMatrix = fb.array();
+      
+      float xPos = thisMatrix[12];
+      float yPos = thisMatrix[14];
+      
+      //TODO: rotation?!
+      
+      //println("actor's current state. FRAME: " + currentState.getFrame() + " POSITION: (x=" + xPos + ", y=" + -yPos + ")");
+      
+      shape(icon, xPos, -yPos);
+      break;
+    }
+    
+    
+   }
+   
+   
  }
  
   //-----------------GETTERS/ SETTERS-------------------------------------

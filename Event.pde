@@ -36,26 +36,28 @@ private class Event {
  //------------------------------------------------------
  private void draw() {
    
-    float start = map((_startFrame), 0, NUMFRAMES, timeline.getTrackXPos(), timeline.getWidth());
-    float end   = map((_endFrame), 0, NUMFRAMES, timeline.getTrackXPos(), timeline.getWidth());
-    float width = end - start;
+   // map start and end values to the timeline dimensions on screen
+    float start = map((_startFrame), 0, NUMFRAMES, timeline.getXStart(), timeline.getXEnd());
+    float end   = map((_endFrame), 0, NUMFRAMES, timeline.getXStart(), timeline.getXEnd());
     
-    float y = (displayHeight - timeline.getTrackYPos()) + ((_relevence - 1)*(5+timeline.getTrackHeight()));
+    float width = end - start;
     float height = timeline.getTrackHeight(); 
+    float y = (timeline.getBottomTrackGroup2()) - ((_relevence)*(5+timeline.getTrackHeight()));
    
     String s = _label;
   
   
-   fill(33,33,33,10);
+
+  
+   fill(44, 90);
+   noStroke();
    rect(start, y, width, height);
    
    fill(255);
    stroke(255);
    line(start, y, start, y + height);
    noStroke();
-   
-   text(s, (start + 10), (y + (height/2)));
-  
+    text(s, (start + 10), (y + (height/2)));
  }
  
  

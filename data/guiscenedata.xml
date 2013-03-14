@@ -7,11 +7,31 @@
 			<state frame="0">
 				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
 			</state>
+				<state frame="220">
+					<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -200.0f 1f</pos>
+				</state>
 			<state frame="560">
 				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
 			</state>
-			<state frame="8970">
+			<state frame="600">
 				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
+			</state>
+		</node>
+		
+		<node>
+			<name>Actor2</name>
+			<label>Juliet</label>
+			<state frame="0">
+				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 300.0f 000.0f -100.0f 1f</pos>
+			</state>
+				<state frame="120">
+					<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 200.0f 000.0f -200.0f 1f</pos>
+				</state>
+			<state frame="300">
+				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 500.0f 000.0f -300.0f 1f</pos>
+			</state>
+			<state frame="420">
+				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 600.0f 000.0f -400.0f 1f</pos>
 			</state>
 		</node>
 	</actors>

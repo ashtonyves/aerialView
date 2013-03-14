@@ -62,25 +62,30 @@ public FloatBuffer getPositionForState(int i) {
     VISUALIZE OBJECT ON SCREEN 
   *****************************************************************/
   //------------------------------------------------------
-  void drawCamera() {
+  void draw() {
     
     for( int i = 0; i< this.getStates().size(); i++) {
-      // icon on the timeline
-      drawCameraOnTimeline(getFrameForState(i));
-      // object in the schematic
-      drawCameraInScene(getPositionForState(i));
+      
+      drawCameraOnTimeline(getFrameForState(i)); // always
+      drawCameraInScene(getPositionForState(i)); // only if its one of the three cameras
+      
     }
   }
   
   //------------------------------------------------------
   void drawCameraOnTimeline(int frame) {
-    // map the frame to the length of the timeline
-    //  Probably better ways to do this using the Timeline object
-    float xPos = map((float)frame, 0, NUMFRAMES, 40, displayWidth - 2*40); // refactor so that all this does is draw -- all frame mapping should be between SceneManager and Timeline
     
+    // map the camera frame to the length of the timeline
+    float xPos = map((float)frame, 0, NUMFRAMES, timeline.getXStart(), timeline.getXEnd()); // refactor so that all this does is draw -- all frame mapping should be between SceneManager and Timeline
+    
+    fill(255);
+    stroke(1);
+    strokeWeight(3);
     // draw line
-    line(xPos, displayHeight - 140, xPos, displayHeight-60);
-    
+    line(xPos, timeline.getBottomTimeline(), xPos, (timeline.getBottomTimeline()-timeline.timelineHeight) );
+    strokeWeight(1);
+    // TODO
+    // loadCameraIcon based on its state
 }
   //------------------------------------------------------
   void drawCameraInScene(FloatBuffer pos) {

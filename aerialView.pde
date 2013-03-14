@@ -10,14 +10,22 @@ SceneManager manager;
 
 // background color
 color bg = color(70,70,70);
-int padding = 40;
+int padding = 50;
+
 
 // length of the scripted scene
-public final int NUMFRAMES = 300;
+int FPS = 30;
+int NUMFRAMES = 300;
+int CURRENTFRAME = 0;
+
+boolean isPlaying;
+
 
   //------------------------------------------------------
 void setup() {
-
+  
+  frameRate(FPS);
+  
   // draw environment
   background(bg);
   size(displayWidth, displayHeight);
@@ -25,11 +33,43 @@ void setup() {
   //create the SceneManager
   manager = new SceneManager();
   timeline = new Timeline();
- 
+  
+  isPlaying = false;
+
 }
 
   //------------------------------------------------------
 void draw() {
- // draw the scene from SceneManager data
+  background(bg);
+  // TODO: UPDATE PLAYHEAD
+  
+  timeline.drawTracks();
+  timeline.drawPlayhead(CURRENTFRAME);
+
   manager.drawScene();
+  
+  if(isPlaying ) {
+    CURRENTFRAME++;
+  } else {
+    CURRENTFRAME = CURRENTFRAME;
+  }
+  
+  
+}
+
+
+//**********************************************************
+// dummy OSC messages
+//**********************************************************
+
+
+
+void keyPressed() {
+ //println(keyCode);
+ 
+ // SPACEBAR
+ // toggles isPlaying
+ if (keyCode == 32) {
+  isPlaying = !isPlaying; 
+ }
 }
