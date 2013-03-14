@@ -10,9 +10,10 @@ SceneManager manager;
 
 // background color
 color bg = color(70,70,70);
+int padding = 40;
 
 // length of the scripted scene
-public final int maxFrames = 3000;
+public final int NUMFRAMES = 300;
 
   //------------------------------------------------------
 void setup() {
@@ -23,10 +24,7 @@ void setup() {
   
   //create the SceneManager
   manager = new SceneManager();
-  
-  // draw the timeline
   timeline = new Timeline();
-  timeline.drawTracks();
  
 }
 

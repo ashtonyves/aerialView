@@ -76,7 +76,7 @@ public FloatBuffer getPositionForState(int i) {
   void drawCameraOnTimeline(int frame) {
     // map the frame to the length of the timeline
     //  Probably better ways to do this using the Timeline object
-    float xPos = map((float)frame, 0, maxFrames, 40, displayWidth - 2*40); 
+    float xPos = map((float)frame, 0, NUMFRAMES, 40, displayWidth - 2*40); // refactor so that all this does is draw -- all frame mapping should be between SceneManager and Timeline
     
     // draw line
     line(xPos, displayHeight - 140, xPos, displayHeight-60);

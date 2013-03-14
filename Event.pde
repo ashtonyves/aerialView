@@ -8,7 +8,7 @@
 * 
 **/
 
-public class Event {
+private class Event {
  
   String _label;
   int _startFrame;
@@ -34,10 +34,28 @@ public class Event {
  
  
  //------------------------------------------------------
- public void draw(int x, int y, int width, int height) {
-   // put text in rectangle
-   fill(240,240,39);
-   rect(x, y, width, height);
+ private void draw() {
+   
+    float start = map((_startFrame), 0, NUMFRAMES, timeline.getTrackXPos(), timeline.getWidth());
+    float end   = map((_endFrame), 0, NUMFRAMES, timeline.getTrackXPos(), timeline.getWidth());
+    float width = end - start;
+    
+    float y = (displayHeight - timeline.getTrackYPos()) + ((_relevence - 1)*(5+timeline.getTrackHeight()));
+    float height = timeline.getTrackHeight(); 
+   
+    String s = _label;
+  
+  
+   fill(33,33,33,10);
+   rect(start, y, width, height);
+   
+   fill(255);
+   stroke(255);
+   line(start, y, start, y + height);
+   noStroke();
+   
+   text(s, (start + 10), (y + (height/2)));
+  
  }
  
  

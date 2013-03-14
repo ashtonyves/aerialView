@@ -7,18 +7,18 @@
 
 public class Timeline {
    
-  final int _margin = 40;
-  final int _x = _margin;
-  final int _y = displayHeight - 100;
-  final int _width = displayWidth - 2*(_margin);
+  final float _x = padding;
+  final float _y = displayHeight - 100;
+  final float _width = displayWidth - (2*_x);
   
    // environment dimensions
-  int trackHeight = 50;
-  int trackXPos = 40;
-  int trackYPos = 450;
+  float trackHeight = 50;
+  float trackXPos = 40;
+  float trackYPos = 450;
   
   // tracks for events and lights
-  int numLightTracks = 2;
+  //int numLightTracks = 2;
+  int numLightTracks = 0;
   int numEventTracks = 4;
   
   // current scale of the timline
@@ -27,6 +27,7 @@ public class Timeline {
   
   // constructor ________________________ 
   Timeline () {
+    drawTracks();
   }
   
 
@@ -78,37 +79,34 @@ public class Timeline {
   public float getScale() {
     return _scale;
   }
+  
   //------------------------------------------------------
-  public float getLength() {
-    return _width;
-  }
-  //------------------------------------------------------
-  public void setLength(int length) {
+  public void setWidth(float length) {
     length = _width;
   }
  //------------------------------------------------------
- public int getTrackHeight() {
+ public float getTrackHeight() {
    return trackHeight;
  }
    //------------------------------------------------------
-   public int getTrackXPos() {
+   public float getTrackXPos() {
     return trackXPos;
   }
   //------------------------------------------------------
-  public int getTrackYPos() {
+  public float getTrackYPos() {
     return trackYPos;
   }
   //------------------------------------------------------
   
- public int getWidth() {
+ public float getWidth() {
    return _width;
  }
   //------------------------------------------------------
- public int getX() {
+ public float getX() {
    return _x;
  }
    //------------------------------------------------------
- public int getY() {
+ public float getY() {
    return _y;
  }
  //------------------------------------------------------

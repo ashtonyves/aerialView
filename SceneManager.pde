@@ -11,7 +11,7 @@ public class SceneManager {
   // initialization values
   int activeCam = 0; // start active camera as the first one in the array
   
-  Timeline t = new Timeline();
+  // Timeline t = new Timeline();
 
    //----------CONSTRUCTOR-------------------------------------------- 
   SceneManager() {
@@ -220,13 +220,7 @@ public class SceneManager {
       // draw event on the timeline
       for (int i = 0; i < events.size(); i++ ) {
         Event e = events.get(i);
-        e.draw(
-          timeline.getX(), // map this value
-          (displayHeight - t.getTrackYPos()) + ((e.getRelevence() - 1)*(5+t.getTrackHeight())),  
-          80, 
-          t.getTrackHeight()); 
-          
-          
+        e.draw();
       };
     
     // for each light in the array 
