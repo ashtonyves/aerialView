@@ -1,12 +1,7 @@
 public class SceneManager {
  
   String SCENEFILE = "guiscenedata.xml";
-  
-  // hold all data from XML
-  ArrayList<Camera> cameras;
-  ArrayList<Actor> actors;
-  ArrayList<Light> lights;
-  ArrayList<Event> events;
+
   
   // initialization values
   int activeCam = 0; // start active camera as the first one in the array

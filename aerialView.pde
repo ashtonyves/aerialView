@@ -13,10 +13,10 @@ color bg = color(70,70,70);
 int padding = 50;
 
   // hold all data from XML
-  ArrayList<Camera> cameras;
-  ArrayList<Actor> actors;
-  ArrayList<Light> lights;
-  ArrayList<Event> events;
+ArrayList<Camera> cameras;
+ArrayList<Actor> actors;
+ArrayList<Light> lights;
+ArrayList<Event> events;
   
 // length of the scripted scene
 int FPS = 30;
@@ -33,11 +33,15 @@ void setup() {
   
   // draw environment
   background(bg);
-  size(displayWidth, displayHeight);
+  size(displayWidth, displayHeight, P3D);
+  smooth();
+  
   
   //create the SceneManager
   manager = new SceneManager();
   timeline = new Timeline();
+  
+ 
   
   isPlaying = false;
 
@@ -79,6 +83,6 @@ void keyPressed() {
  }
  
  if(key== 'a') {
-  cameras.get(0).getState(0).setActive();
+  cameras.get(0).getState(0).setViolating(); 
  }
 }

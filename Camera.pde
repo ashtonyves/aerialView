@@ -18,8 +18,7 @@ public class Camera  {
   
  
   
-  PShape iconDefault;
-  PShape iconActive;
+  PImage iconDefault;
   PShape iconSelectedTime;
   PShape icondSelectedPos;
   
@@ -36,10 +35,8 @@ public class Camera  {
   }
   
   //------------------------------------------------------
-  void loadShapes() {
-     
-    iconDefault = loadShape("camera_neutral.svg");
-    iconActive = loadShape("camera_active.svg");
+  void loadShapes() {     
+    iconDefault = loadImage("camera_neutral.png");
   }
    //------------------------------------------------------
     void sortCameraStates() {
@@ -73,30 +70,39 @@ public class Camera  {
   void drawStateOnTimeline(CameraState s) {
     
     int frame = s.getFrame();
-    
     // map the camera frame to the length of the timeline
-    float xPos = map((float)frame, 0, NUMFRAMES, timeline.getXStart(), timeline.getXEnd()); // refactor so that all this does is draw -- all frame mapping should be between SceneManager and Timeline
+    float xPos = map((float)frame, 0, NUMFRAMES, timeline.getXStart(), timeline.getXEnd()); 
+    
+    float cDiameter = 45;
+    float cPos = (timeline.getBottomTimeline()-timeline.timelineHeight)-15;
     
     fill(255);
     stroke(1);
     strokeWeight(3);
+    
     // draw line
     line(xPos, timeline.getBottomTimeline(), xPos, (timeline.getBottomTimeline()-timeline.timelineHeight) );
+    
     strokeWeight(1);
     
     // loadCameraIcon based on its state
     if(s._isActive) {
-      ellipse(xPos-25, (timeline.getBottomTimeline()-timeline.timelineHeight -40), 80, 80);
+      fill(255,50);
+      ellipse(xPos, cPos, cDiameter, cDiameter);
     }
     if(s._isViolating) {
-      
+      fill(255, 0, 0, 50);
+      ellipse(xPos, cPos, cDiameter, cDiameter);
     }
-    if(s._isSelectedForPositionInSpace) {
     
+    
+    if(s._isSelectedForPositionInSpace) {
+      // nothing, because you don't see the timline when you are positioning the camera  
     }else if (s._isSelectedForPositionInTime) {
+       fill(255);
        
     }
-    shape(iconDefault, xPos-25, (timeline.getBottomTimeline()-timeline.timelineHeight -40));
+    image(iconDefault, xPos-25, (timeline.getBottomTimeline()-timeline.timelineHeight -40));
     
 }
   //------------------------------------------------------
@@ -205,7 +211,7 @@ public FloatBuffer getPositionForState(int i) {
     _isActive = true;
   } 
   //------------------------------------------------------
-  public void setViolated() {
+  public void setViolating() {
     _isViolating = true;
   }
   
