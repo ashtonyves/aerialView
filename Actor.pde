@@ -61,11 +61,14 @@ public class Actor {
       float xPos = thisMatrix[12];
       float yPos = thisMatrix[14];
       
+      
       //TODO: rotation?!
       
       //println("actor's current state. FRAME: " + currentState.getFrame() + " POSITION: (x=" + xPos + ", y=" + -yPos + ")");
-      
+      //pushMatrix();
+      //rotateY(acos(thisMatrix[0])); // WEIRD! WAY TO ROTATE....
       shape(icon, xPos, -yPos);
+      //popMatrix();
       break;
     }
     

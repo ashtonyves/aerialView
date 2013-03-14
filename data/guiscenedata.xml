@@ -5,16 +5,16 @@
 			<name>Actor1</name>
 			<label>Romeo</label>
 			<state frame="0">
-				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
+				<pos>0.1f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
 			</state>
 				<state frame="220">
 					<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -200.0f 1f</pos>
 				</state>
 			<state frame="560">
-				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
+				<pos>0.9f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
 			</state>
 			<state frame="600">
-				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
+				<pos>0.3f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
 			</state>
 		</node>
 		
@@ -104,12 +104,13 @@
 	<cameras>
 		<node>
 			<name>Camera1</name>
-			<state frame="0">
-				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
-			</state>		
 			<state frame="40">
 				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
 			</state>
+			<state frame="0">
+				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
+			</state>		
+			
 		</node>
 	</cameras>
 </objects>
