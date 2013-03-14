@@ -13,13 +13,10 @@ import java.util.Comparator;
 
  
 public class Camera  {
-  String       _name;       // MSB name (may be superfluous here)
+  String    _name;       // MSB name (may be superfluous here)
   ArrayList<CameraState> _states;
   
-  boolean _isSelectedForPositionInSpace;
-  boolean _isSelectedForPositionInTime;
-  boolean _isActive;
-  boolean _isViolating;
+ 
   
   PShape iconDefault;
   PShape iconActive;
@@ -59,19 +56,23 @@ public class Camera  {
     
     for( int i = 0; i< this.getStates().size(); i++) {
       
-      drawCameraOnTimeline(getFrameForState(i)); // always
-      drawCameraInScene(getPositionForState(i)); // only if its one of the three cameras
+      CameraState s = getStates().get(i);
+      
+      drawStateOnTimeline(s);   // always
+      drawStateInScene(s);     // only if its one of the three cameras
       
     }
     
+    // TEST 
      for (CameraState state : _states) {
-      // TEST 
        println(state.getFrame());
     } 
   }
   
   //------------------------------------------------------
-  void drawCameraOnTimeline(int frame) {
+  void drawStateOnTimeline(CameraState s) {
+    
+    int frame = s.getFrame();
     
     // map the camera frame to the length of the timeline
     float xPos = map((float)frame, 0, NUMFRAMES, timeline.getXStart(), timeline.getXEnd()); // refactor so that all this does is draw -- all frame mapping should be between SceneManager and Timeline
@@ -82,35 +83,32 @@ public class Camera  {
     // draw line
     line(xPos, timeline.getBottomTimeline(), xPos, (timeline.getBottomTimeline()-timeline.timelineHeight) );
     strokeWeight(1);
-    shape(iconDefault, xPos-25, (timeline.getBottomTimeline()-timeline.timelineHeight -40));
-    // TODO
+    
     // loadCameraIcon based on its state
+    if(s._isActive) {
+      ellipse(xPos-25, (timeline.getBottomTimeline()-timeline.timelineHeight -40), 80, 80);
+    }
+    if(s._isViolating) {
+      
+    }
+    if(s._isSelectedForPositionInSpace) {
+    
+    }else if (s._isSelectedForPositionInTime) {
+       
+    }
+    shape(iconDefault, xPos-25, (timeline.getBottomTimeline()-timeline.timelineHeight -40));
+    
 }
   //------------------------------------------------------
-  void drawCameraInScene(FloatBuffer pos) {
-    
+  void drawStateInScene(CameraState s) {
+    FloatBuffer fb  = s.getPosition();
     // select the SVG depending on its status
     
     // and transform it
   }
   
-  // Change the appearance of the icon based on its status
-  //------------------------------------------------------
-  public void setSelectedForPositionChange(boolean val) {
- 
-  }
-  //------------------------------------------------------
-  public void setSelectedForTimeChange() {
-    
-  }
-  //------------------------------------------------------
-  public void setActive() {
-    
-  } 
-  //------------------------------------------------------
-  public void setViolated() {
-    
-  }
+
+  
 
   //-----------------GETTERS/ SETTERS-------------------------------------
    public String getName() {
@@ -127,11 +125,14 @@ public class Camera  {
    _states.add(state);
    sortCameraStates();
  }
- //------------------------------------------------------
+  //------------------------------------------------------
+ public CameraState getState(int i) {
+   return _states.get(i);
+ }
+  //------------------------------------------------------
  public ArrayList<CameraState> getStates() {
    return _states;
  }
- 
  //------------------------------------------------------
  public int getFrameForState(int i) {
    return _states.get(i).getFrame();
@@ -145,6 +146,7 @@ public FloatBuffer getPositionForState(int i) {
    
   /*****************************************************************
     INNER CLASS TO IMPLEMENT COMPARATOR 
+    http://stackoverflow.com/questions/2784514/sort-arraylist-of-custom-objects-by-property
   *****************************************************************/
   public class CustomComparator implements Comparator<CameraState> {
     @Override
@@ -163,6 +165,11 @@ public FloatBuffer getPositionForState(int i) {
    
    int _frame;
    FloatBuffer _transform;
+   
+  boolean _isSelectedForPositionInSpace;
+  boolean _isSelectedForPositionInTime;
+  boolean _isActive;
+  boolean _isViolating;
   
   //--------------------CONSTRUCTOR ----------------------------------
    public CameraState(int frame, float[] transform) {
@@ -176,6 +183,36 @@ public FloatBuffer getPositionForState(int i) {
    public CameraState() {
    }
    
+   
+   // SET THE STATE OF THE CAMERA
+   //------------------------------------------------------
+  public void setSelectedForPositionInSpace() {
+   _isSelectedForPositionInSpace = true;
+  }
+  //------------------------------------------------------
+  public void setSelectedForPositionInTime() {
+    _isSelectedForPositionInTime = true;
+  }
+  //------------------------------------------------------
+  public void deselect() {
+    _isSelectedForPositionInSpace = false;
+    _isSelectedForPositionInTime = false;
+  }
+  
+  //------------------------------------------------------
+  public void setActive() {
+    // maybe first set all cameras to inactive?
+    _isActive = true;
+  } 
+  //------------------------------------------------------
+  public void setViolated() {
+    _isViolating = true;
+  }
+  
+  
+  
+  
+  
    //--------------------GETTERS/SETTERS----------------------------------
    public void setPosition(float[] transform) {
      _transform.put(transform);
@@ -192,7 +229,10 @@ public FloatBuffer getPositionForState(int i) {
    public void setFrame(int frame) {
     _frame = frame; 
    }
-     
+   //------------------------------------------------------
+  public CameraState getState() {
+   return this;
+  }   
   
  }
  
