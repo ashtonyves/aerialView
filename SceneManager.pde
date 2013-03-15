@@ -190,6 +190,8 @@ public class SceneManager {
       println("Camera added at FRAME "  + c.getFrame() + " at POSITION " + bufferToString(c.getPosition()) );
       
     }
+    
+    sortCameras();
   }
   
  
@@ -230,35 +232,19 @@ public class SceneManager {
    }
   }
      
-
+  
   }
   
   
   /******************************************
    ----------------- CAMERAS ----------------- 
   ******************************************/
-  
-  void addCamera(float[] transform, int startFrame) {
-    
-    // create the camera object
-    Camera newCam = new Camera();
-   
-    // add the camera to cameras array
-    //cameras.add(newCam);
-    
-    // TODO: order cameras by start time;
-    
+    //------------------------------------------------------
+  void sortCameras() {
+     Collections.sort(cameras, new CustomComparator());
   }
-  
-  //-----------------------------------------------------
-  void deleteCamera(Camera camera) {
-    // find camera in cameras array
-    // delete camera
-    // order cameras by start time
-  }
-  
 
-      //-----------------------------------------------------
+  //-----------------------------------------------------
  void setActiveCamera() {
      Camera currentCamera = null; 
      // IMPORTANT -- CAMERAS MUST BE SORTED BEFORE RUNNING THIS FUNCTION
@@ -308,6 +294,22 @@ public class SceneManager {
   String bufferToString(FloatBuffer fb) {
     return Arrays.toString(fb.array()); 
   } 
+  
+    /*****************************************************************
+    INNER CLASS TO IMPLEMENT COMPARATOR 
+    http://stackoverflow.com/questions/2784514/sort-arraylist-of-custom-objects-by-property
+  *****************************************************************/
+  public class CustomComparator implements Comparator<Camera> {
+    @Override
+    public int compare(Camera c1, Camera c2) {
+        Integer i1 = new Integer(c1.getFrame());
+        Integer i2 = new Integer(c2.getFrame());
+        
+        return i1.compareTo(i2);
+    }
+  }
+  
+
   
   
 }

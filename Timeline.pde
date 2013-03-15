@@ -85,8 +85,8 @@ public class Timeline {
   //------------------------------------------------------
   void drawEventTracks() {
    if(showTracks) {
-    noStroke();
-    fill(144,144,144, 60);
+      noStroke();
+      fill(144,144,144, 60);
     
     for(int i=0; i<numEventTracks; i++) {
       rect(
@@ -94,9 +94,11 @@ public class Timeline {
         bottomTrackGroup2 - ((i+1)*(5 + trackHeight)),  
         width, 
         trackHeight);
+      }
     }
   }
-  }
+  
+
   
   //------------------------------------------------------
   // zoom into the timeline 

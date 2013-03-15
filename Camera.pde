@@ -48,10 +48,7 @@ public class Camera  {
     iconDefault = loadImage("camera_neutral.png");
   }
  
-   //------------------------------------------------------
-  void sortCameraStates() {
-     Collections.sort(cameras, new CustomComparator());
-  }
+ 
       
  
 
@@ -164,20 +161,7 @@ public class Camera  {
      return _transform;
    }
    
-   
-  /*****************************************************************
-    INNER CLASS TO IMPLEMENT COMPARATOR 
-    http://stackoverflow.com/questions/2784514/sort-arraylist-of-custom-objects-by-property
-  *****************************************************************/
-  public class CustomComparator implements Comparator<Camera> {
-    @Override
-    public int compare(Camera c1, Camera c2) {
-        Integer i1 = new Integer(c1.getFrame());
-        Integer i2 = new Integer(c2.getFrame());
-        
-        return i1.compareTo(i2);
-    }
-  }
+  
 }
   
 

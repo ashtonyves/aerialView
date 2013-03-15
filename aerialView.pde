@@ -73,15 +73,34 @@ void draw() {
 
 
 void keyPressed() {
- //println(keyCode);
+ println(keyCode);
  
- // SPACEBAR
- // toggles isPlaying
+ // SPACEBAR toggles playback
  if (keyCode == 32) {
   isPlaying = !isPlaying; 
  }
  
- if(key== 'a') {
-  cameras.get(0).setActive();
+ // reset playhead
+ if (keyCode == 8) {
+  isPlaying = false;
+  CURRENTFRAME = 0;
+ }
+ 
+ // two hands in frame - show the timeline
+  if(key== '2') {
+  showTimeline = true;
+  showTracks = true;
+ }
+ 
+ // one hand in frame - hide the timeline
+  if(key== '1') {
+  showTimeline = false;
+  showTracks = false;
+  // and stop the movie from playing, if it's playing
+  // NOTE: this might not be the effect you want.
+  // you might want to view the ongoing scene while positioning a camera
+  if(isPlaying) {
+    isPlaying = false;
+  }
  }
 }
