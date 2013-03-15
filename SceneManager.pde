@@ -171,20 +171,15 @@ public class SceneManager {
       
       // add attributes to object
       c.setName(node.getChild("name").getContent());
-      
-        for(int j=0; j < node.getChildren("state").length; j ++) {
-        XML[] stateNode = node.getChildren("state");
-        
-        // get start frame
-        int frame = stateNode[j].getInt("frame");
-        // get position matrix
-        String stringPosition = stateNode[j].getChild("pos").getContent(); 
-        float[] transform = toFloatArray(stringPosition);
-        //println(Arrays.toString(transform));
+      // get start frame
+      c.setFrame(node.getChild("frame").getInt("start"));
+      // get position matrix
+      String stringPosition = node.getChild("pos").getContent(); 
+      float[] transform = toFloatArray(stringPosition);
+      c.setPosition(transform);
 
-        // create a new state and add it to the Actor
-         c.addState(frame, transform);
-      }
+      //println(Arrays.toString(transform));
+
       // add the camera to the cameras array
       cameras.add(c);
       
@@ -192,15 +187,12 @@ public class SceneManager {
       println(" ");
       println("---------------CAMERA ADDED------------------");
       println(c.getName());
-      ArrayList testStates = c.getStates();
-      for(int p =0; p < testStates.size(); p++) {
-         println("State added at FRAME "  + c.getFrameForState(p) + " at POSITION " + bufferToString(c.getPositionForState(p)) );
-      }
+      println("Camera added at FRAME "  + c.getFrame() + " at POSITION " + bufferToString(c.getPosition()) );
       
     }
   }
   
-  
+ 
   
   
   
@@ -209,6 +201,7 @@ public class SceneManager {
   *****************************************************************/
   public void drawScene() {
 
+    if(showTracks) {
     // for each event in the array 
       // draw event on the timeline
       for (int i = 0; i < events.size(); i++ ) {
@@ -218,7 +211,8 @@ public class SceneManager {
     
     // for each light in the array 
       // draw light on the timeline
-  
+    }
+    
    // for each actor in the array
      // draw it to the stage
    for (int i = 0; i < actors.size(); i++) {
@@ -227,13 +221,14 @@ public class SceneManager {
      a.draw();
    }
 
+  if(showTimeline) {
    // for each camera in the array
    for (int i = 0; i < cameras.size(); i++) {
      // draw it on the timeline and in the scene
      Camera c = cameras.get(i);
      c.draw();
    }
-   
+  }
      
 
   }
@@ -255,13 +250,37 @@ public class SceneManager {
     
   }
   
+  //-----------------------------------------------------
   void deleteCamera(Camera camera) {
     // find camera in cameras array
     // delete camera
     // order cameras by start time
   }
   
-  
+
+      //-----------------------------------------------------
+ void setActiveCamera() {
+     Camera currentCamera = null; 
+     // IMPORTANT -- CAMERAS MUST BE SORTED BEFORE RUNNING THIS FUNCTION
+    
+     // loop through all cameras
+     for (int i = 0; i < cameras.size(); i++) {
+          Camera c = cameras.get(i);
+           if(CURRENTFRAME == 0) {
+             currentCamera = cameras.get(0);
+            }
+           // compare the value of CURRENTFRAME
+           // to all startFrames for states in camera array.
+          else if (c.getFrame() < CURRENTFRAME) {
+            // if it is less that the current frame, save it to the current state
+             currentCamera = c;
+          } 
+        
+         currentCamera.setActive(); 
+         
+      }
+   }
+ 
   
   /******************************************
    ----------------- helpers ----------------- 

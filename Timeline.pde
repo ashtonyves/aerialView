@@ -20,6 +20,7 @@ public class Timeline {
   // trackHeights
   float timelineHeight = 100;
   float trackHeight = 50;
+
  
   
   // bottom y values for track groups
@@ -49,22 +50,25 @@ public class Timeline {
   
   //------------------------------------------------------
   void drawTimeline() {
-    line(x, bottomTimeline - (timelineHeight/2), x + width, bottomTimeline - (timelineHeight/2));
-    //endcaps
-    line(x, bottomTimeline, x, (bottomTimeline - timelineHeight));
-    line(x+width, bottomTimeline, x+width, (bottomTimeline - timelineHeight));
+    if(showTimeline) {
+      line(x, bottomTimeline - (timelineHeight/2), x + width, bottomTimeline - (timelineHeight/2));
+      //endcaps
+      line(x, bottomTimeline, x, (bottomTimeline - timelineHeight));
+      line(x+width, bottomTimeline, x+width, (bottomTimeline - timelineHeight));
+    }
   }
   
   //------------------------------------------------------
   void drawPlayhead(int pos) {
-    stroke(255);
-    float xPos = map(pos, 0, NUMFRAMES, x, width);
-    line(xPos, bottomTimeline, xPos, bottomTrackGroup2 - ((numEventTracks) * (5 + trackHeight)));
-    // draw flag
+    if(showTimeline) {
+      stroke(255);
+      float xPos = map(pos, 0, NUMFRAMES, x, width);
+      line(xPos, bottomTimeline, xPos, bottomTrackGroup2 - ((numEventTracks) * (5 + trackHeight)));
+    }
   }
   //------------------------------------------------------
   void drawLightTracks() {
- 
+   if(showTracks) {
     noStroke();
     fill(0, 144, 144, 60);
     
@@ -75,11 +79,12 @@ public class Timeline {
         width, 
         trackHeight);
     }
+   }
   }
   
   //------------------------------------------------------
   void drawEventTracks() {
-   
+   if(showTracks) {
     noStroke();
     fill(144,144,144, 60);
     
@@ -90,6 +95,7 @@ public class Timeline {
         width, 
         trackHeight);
     }
+  }
   }
   
   //------------------------------------------------------
@@ -147,5 +153,6 @@ public class Timeline {
  public int getNumLightTracks() {
    return numLightTracks;
  }
+ 
 }
   

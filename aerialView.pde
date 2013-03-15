@@ -23,7 +23,11 @@ int FPS = 30;
 int NUMFRAMES = 300;
 int CURRENTFRAME = 0;
 
-boolean isPlaying;
+boolean isPlaying = false;
+
+boolean showTimeline = true;
+boolean showTracks = true;
+
 
 
   //------------------------------------------------------
@@ -36,21 +40,18 @@ void setup() {
   size(displayWidth, displayHeight, P3D);
   smooth();
   
-  
   //create the SceneManager
   manager = new SceneManager();
   timeline = new Timeline();
   
- 
-  
-  isPlaying = false;
 
 }
 
   //------------------------------------------------------
 void draw() {
   background(bg);
-  // TODO: UPDATE PLAYHEAD
+
+  manager.setActiveCamera();
   
   timeline.drawTracks();
   timeline.drawPlayhead(CURRENTFRAME);
@@ -62,15 +63,13 @@ void draw() {
   } else {
     CURRENTFRAME = CURRENTFRAME;
   }
-  
-  
+
 }
 
 
 //**********************************************************
 // dummy OSC messages
-//**********************************************************
-
+//*****************************************************
 
 
 void keyPressed() {
@@ -83,6 +82,6 @@ void keyPressed() {
  }
  
  if(key== 'a') {
-  cameras.get(0).getState(0).setViolating(); 
+  cameras.get(0).setActive();
  }
 }
