@@ -42,7 +42,7 @@ private class Event {
     
     float width = end - start;
     float height = timeline.getTrackHeight(); 
-    float y = (timeline.getBottomTrackGroup2()) - ((_relevence)*(5+timeline.getTrackHeight()));
+    float y = (timeline.getBottomTrackGroup2()) - ((timeline.getNumEventTracks()+1-_relevence)*(5+timeline.getTrackHeight()));
    
     String s = _label;
   
@@ -57,6 +57,8 @@ private class Event {
    stroke(255);
    line(start, y, start, y + height);
    noStroke();
+   textAlign(LEFT, CENTER);
+   textSize(20);
     text(s, (start + 10), (y + (height/2)));
  }
  

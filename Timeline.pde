@@ -12,8 +12,7 @@ public class Timeline {
   int numEventTracks = 5;
   
   float padding = 50;
-  
-  float labelWidth = 80;
+  float labelWidth = 50;
   
   float x = padding + labelWidth;
   float width = displayWidth - (2*padding) - labelWidth;
@@ -86,15 +85,45 @@ public class Timeline {
   void drawEventTracks() {
    if(showTracks) {
       noStroke();
-      fill(144,144,144, 60);
+      
+      textSize(24);
+      pushMatrix();
+      translate(padding, bottomTrackGroup2);
+      rotate(-PI/2);
+      rect(0, 0, (numEventTracks)*(5 + trackHeight), padding);
+      translate((numEventTracks*(5 + trackHeight))/2, 0);
+      textAlign(CENTER,CENTER);
+      fill(255);
+      text("EVENTS", 0, 0);
+      noFill();
+      translate(-padding, -bottomTrackGroup2);
+      
+      popMatrix();
     
-    for(int i=0; i<numEventTracks; i++) {
+    for(int i=numEventTracks; i>0; i--) {
+      // draw tracks
+      fill(144,144,144, 60+(i*20));
       rect(
         x, 
-        bottomTrackGroup2 - ((i+1)*(5 + trackHeight)),  
+        bottomTrackGroup2 - ((i)*(5 + trackHeight)),  
         width, 
         trackHeight);
-      }
+      
+      // draw labels
+      fill(255,255,255, 30);
+      /*ellipse(
+        padding + (labelWidth/2),
+        bottomTrackGroup2 - ((i)*(5 + trackHeight)) + ((5+trackHeight - 15)/2),
+        trackHeight - 15,
+        trackHeight - 15
+      );
+      */
+      fill(0);
+      textAlign(CENTER, CENTER);
+      textSize(24);
+      text(i, (padding + labelWidth/2), bottomTrackGroup2 - (((numEventTracks+1)-i)*(5 + trackHeight)) + ((5+trackHeight - 15)/2));
+     }
+     noFill();
     }
   }
   

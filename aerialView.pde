@@ -3,6 +3,8 @@ import proxml.*;
 
 import java.util.Arrays;
 
+PFont font;
+
 OscP5 osc;
 int port = 31842;
 Timeline timeline;
@@ -35,6 +37,8 @@ boolean showTracks = true;
   //------------------------------------------------------
 void setup() {
   
+   font = loadFont("AbadiMT-CondensedLight-24.vlw");
+ textFont(font);
   frameRate(FPS);
   
   // draw environment
