@@ -100,10 +100,11 @@ public class Camera  {
     strokeWeight(1);
 }
   //------------------------------------------------------
-  // TODO
+  // TODO (see Cam.display())
   void drawInScene() {
     FloatBuffer fb  = getPosition();
     // draw the camera icon depending on its status
+    
     
     // and transform it using position matrix
     

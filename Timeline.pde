@@ -94,7 +94,7 @@ public class Timeline {
       translate((numEventTracks*(5 + trackHeight))/2, 0);
       textAlign(CENTER,CENTER);
       fill(255);
-      text("EVENTS", 0, 0);
+      text("EVENTS", 0, 0); 
       noFill();
       translate(-padding, -bottomTrackGroup2);
       

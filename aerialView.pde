@@ -1,17 +1,18 @@
 import oscP5.*;
+import netP5.*;
 import proxml.*;
-
 import java.util.Arrays;
 
-PFont font;
-
-OscP5 osc;
+OscP5 oscP5;
 int port = 31842;
+NetAddress interfaceAddr;
+
 Timeline timeline;
 SceneManager manager;
 
 // background color
 color bg = color(70,70,70);
+PFont font;
 int padding = 50;
 
 // hold all data from XML
@@ -37,8 +38,9 @@ boolean showTracks = true;
   //------------------------------------------------------
 void setup() {
   
-   font = loadFont("AbadiMT-CondensedLight-24.vlw");
- textFont(font);
+  font = loadFont("AbadiMT-CondensedLight-24.vlw");
+  textFont(font);
+  
   frameRate(FPS);
   
   // draw environment
@@ -50,6 +52,9 @@ void setup() {
   manager = new SceneManager();
   timeline = new Timeline();
   
+  oscP5 = new OscP5(this, port);
+  // spoof OSC messages to yourself
+  interfaceAddr = new NetAddress("127.0.0.1", port);
 
 }
 
