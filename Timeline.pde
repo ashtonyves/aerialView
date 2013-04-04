@@ -8,20 +8,20 @@
 public class Timeline {
   
   // tracks for events and lights
-  int numLightTracks = 2;
-  int numEventTracks = 4;
+  int numLightTracks = 0; // functionality not built out fully built out. You cannot turn "off" lights in MSB
+  int numEventTracks = 5;
   
   float padding = 50;
   
-  float x = padding;
-  float width = displayWidth - (2*x);
+  float labelWidth = 80;
+  
+  float x = padding + labelWidth;
+  float width = displayWidth - (2*padding) - labelWidth;
   float xEnd = width + x;  
   
   // trackHeights
   float timelineHeight = 100;
   float trackHeight = 50;
-
- 
   
   // bottom y values for track groups
   float bottomTimeline = displayHeight - padding;
@@ -62,7 +62,7 @@ public class Timeline {
   void drawPlayhead(int pos) {
     if(showTimeline) {
       stroke(255);
-      float xPos = map(pos, 0, NUMFRAMES, x, width);
+      float xPos = map(pos, 0, NUMFRAMES, x, x+width);
       line(xPos, bottomTimeline, xPos, bottomTrackGroup2 - ((numEventTracks) * (5 + trackHeight)));
     }
   }

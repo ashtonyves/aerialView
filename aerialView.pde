@@ -12,7 +12,7 @@ SceneManager manager;
 color bg = color(70,70,70);
 int padding = 50;
 
-  // hold all data from XML
+// hold all data from XML
 ArrayList<Camera> cameras;
 ArrayList<Actor> actors;
 ArrayList<Light> lights;
@@ -21,10 +21,12 @@ ArrayList<Event> events;
 // length of the scripted scene
 int FPS = 30;
 int NUMFRAMES = 300;
-int CURRENTFRAME = 0;
+int CURRENTFRAME = 0; // start at 0
 
 boolean isPlaying = false;
+boolean isPositioningCamera = false;
 
+// show timeline and tracks to start
 boolean showTimeline = true;
 boolean showTracks = true;
 
@@ -58,10 +60,13 @@ void draw() {
 
   manager.drawScene();
   
-  if(isPlaying ) {
-    CURRENTFRAME++;
+  if(isPlaying) {
+    if(CURRENTFRAME < NUMFRAMES) {
+      CURRENTFRAME++;
+    } 
   } else {
     CURRENTFRAME = CURRENTFRAME;
+    isPlaying = false;
   }
 
 }
@@ -71,16 +76,18 @@ void draw() {
 // dummy OSC messages
 //*****************************************************
 
-
 void keyPressed() {
- println(keyCode);
+ println("key pressed: " + keyCode);
  
  // SPACEBAR toggles playback
  if (keyCode == 32) {
-  isPlaying = !isPlaying; 
+  if (!isPositioningCamera) {
+    // don't allow user to play the scene while positioning a camera
+    isPlaying = !isPlaying; 
+  }
  }
  
- // reset playhead
+ //BACKSPACE reset playhead
  if (keyCode == 8) {
   isPlaying = false;
   CURRENTFRAME = 0;
@@ -88,12 +95,14 @@ void keyPressed() {
  
  // two hands in frame - show the timeline
   if(key== '2') {
+  isPositioningCamera = false;  
   showTimeline = true;
   showTracks = true;
  }
  
  // one hand in frame - hide the timeline
   if(key== '1') {
+  isPositioningCamera = true;
   showTimeline = false;
   showTracks = false;
   // and stop the movie from playing, if it's playing
