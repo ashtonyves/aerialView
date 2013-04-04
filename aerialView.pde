@@ -1,6 +1,5 @@
 import oscP5.*;
 import netP5.*;
-import proxml.*;
 import java.util.Arrays;
 
 OscP5 oscP5;

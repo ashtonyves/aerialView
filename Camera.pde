@@ -16,7 +16,8 @@ public class Camera  {
   String  _name;       // MSB name (may be superfluous here) - use to identify selected cams with Kinect data
   int     _frame;
   FloatBuffer _transform;
-   
+  float _fov = 45;
+  
   boolean _isSelectedForPositionInSpace;
   boolean _isSelectedForPositionInTime;
   boolean _isActive;
@@ -79,6 +80,7 @@ public class Camera  {
     if(_isActive) {
        if(_isSelectedForPositionInSpace) {
           // nothing, because you don't see the timline when you are positioning the camera  
+          // well....
         }
         if (_isSelectedForPositionInTime) {
           fill(255,50);
@@ -102,11 +104,15 @@ public class Camera  {
   //------------------------------------------------------
   // TODO (see Cam.display())
   void drawInScene() {
-    FloatBuffer fb  = getPosition();
+    FloatBuffer fb  = getPosition(); // _transform
     // draw the camera icon depending on its status
     
     
     // and transform it using position matrix
+   
+   if(_isSelectedForPositionInSpace) {
+     // display it as selecte
+   }
     
   }
  
@@ -127,7 +133,14 @@ public class Camera  {
   }
   //------------------------------------------------------
   public void setActive() {
-    //first set all cameras to inactive?
+    //first set ALL cameras to inactive
+    for (int i = 0; i < cameras.size(); i++) {
+      //println("camera " + i);
+      Camera c = cameras.get(i);
+      c._isActive = false;
+    }
+    
+    // then display the camera as active
     _isActive = true;
   } 
   //------------------------------------------------------
@@ -162,6 +175,9 @@ public class Camera  {
      return _transform;
    }
    
+   public float getFOV() {
+     return _fov;
+   }
   
 }
   
