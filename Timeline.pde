@@ -11,20 +11,19 @@ public class Timeline {
   int numLightTracks = 0; // functionality not built out fully built out. You cannot turn "off" lights in MSB
   int numEventTracks = 5;
   
-  float padding = 50;
   float labelWidth = 50;
   
-  float x = padding + labelWidth;
+  float x = labelWidth;
   float width = displayWidth - (2*padding) - labelWidth;
   float xEnd = width + x;  
   
   // trackHeights
-  float timelineHeight = 100;
+  float timelineHeight = 50;
   float trackHeight = 50;
   
   // bottom y values for track groups
-  float bottomTimeline = displayHeight - padding;
-  float bottomTrackGroup1 = (bottomTimeline - timelineHeight) - 20; 
+  float topTimeline = displayHeight-timelineHeight;
+  float bottomTrackGroup1 = topTimeline - 30; 
   float bottomTrackGroup2 = 0.0;
   
   // current scale of the timline
@@ -34,7 +33,7 @@ public class Timeline {
   // constructor ________________________ 
   Timeline () {
     // set bottom of tracks based on the number of tracks included
-     // set yValue for track sets dynamically, based on number of tracks
+    // set yValue for track sets dynamically, based on number of tracks
     bottomTrackGroup2 = bottomTrackGroup1 - (numLightTracks * (trackHeight+5));
   }
   
@@ -50,19 +49,25 @@ public class Timeline {
   //------------------------------------------------------
   void drawTimeline() {
     if(showTimeline) {
-      line(x, bottomTimeline - (timelineHeight/2), x + width, bottomTimeline - (timelineHeight/2));
+      line(x, topTimeline + (timelineHeight/2), x + width, topTimeline + (timelineHeight/2));
       //endcaps
-      line(x, bottomTimeline, x, (bottomTimeline - timelineHeight));
-      line(x+width, bottomTimeline, x+width, (bottomTimeline - timelineHeight));
+      line(x, topTimeline, x, height);
+      line(x+width, topTimeline, x+width, height);
     }
   }
   
   //------------------------------------------------------
   void drawPlayhead(int pos) {
     if(showTimeline) {
+      
       stroke(255);
       float xPos = map(pos, 0, NUMFRAMES, x, x+width);
-      line(xPos, bottomTimeline, xPos, bottomTrackGroup2 - ((numEventTracks) * (5 + trackHeight)));
+      
+      if(showTracks) {
+        line(xPos, height, xPos, bottomTrackGroup2 - ((numEventTracks) * (5 + trackHeight)));
+      } else {
+        line(xPos, height, xPos,topTimeline);
+      }
     }
   }
   //------------------------------------------------------
@@ -165,8 +170,8 @@ public class Timeline {
  }
 
  //------------------------------------------------------
- public float getBottomTimeline() {
-   return bottomTimeline;
+ public float getTopTimeline() {
+   return topTimeline;
  } 
  //------------------------------------------------------
  public float getBottomTrackGroup1() {

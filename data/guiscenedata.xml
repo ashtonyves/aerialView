@@ -104,13 +104,23 @@
 	<cameras>
 		<node>
 			<name>Camera1</name>
-			<frame start="40"></frame>
+			<frame start="0"></frame>
 			<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
 		</node>
 		<node>
-			<name>Camera1</name>
-			<frame start="0"></frame>
+			<name>Camera2</name>
+			<frame start="40"></frame>
 			<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
-		</node>		
+		</node>	
+			<node>
+				<name>Camera3</name>
+				<frame start="100"></frame>
+				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
+			</node>
+			<node>
+				<name>Camera4</name>
+				<frame start="120"></frame>
+				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
+			</node>	
 	</cameras>
 </objects>

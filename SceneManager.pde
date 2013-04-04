@@ -246,33 +246,60 @@ public class SceneManager {
 
   //-----------------------------------------------------
  void setActiveCamera() {
-     Camera currentCamera = null; 
+     //Camera currentCamera = null; 
      // IMPORTANT -- CAMERAS MUST BE SORTED BEFORE RUNNING THIS FUNCTION
     
-     // loop through all cameras
-     for (int i = 0; i < cameras.size(); i++) {
+    // first set all cameras to inactive
+    for (int i = 0; i < cameras.size(); i++) {
+      //println("camera " + i);
+      Camera c = cameras.get(i);
+      c._isActive = false;
+    }
+
+     // loop through all cameras. COUNT DOWN!
+     for (int i = cameras.size()-1; i>=0; i--) {
           Camera c = cameras.get(i);
-           if(CURRENTFRAME == 0) {
+          // if the playhead is on the first or last frame
+          // then no comparison is necessary. Active came is the first/last camera in the array
+          if(CURRENTFRAME == 0) {
              currentCamera = cameras.get(0);
-            }
-           // compare the value of CURRENTFRAME
-           // to all startFrames for states in camera array.
-          else if (c.getFrame() < CURRENTFRAME) {
-            // if it is less that the current frame, save it to the current state
-             currentCamera = c;
-          } 
-        
-         currentCamera.setActive(); 
-         
+           }
+           else if(CURRENTFRAME == NUMFRAMES) {
+             currentCamera = cameras.get(cameras.size()-1);
+           }
+           // Otherwise, 
+           // compare value of CURRENTFRAME to all startFrames in cameras array.
+          else if(c.getFrame() < CURRENTFRAME) {
+            // if the camera's start frame is greater than the current frame, 
+            // then the camera before that must be currently active.
+             currentCamera = cameras.get(i);
+             break;
+          }
       }
+    //println(currentCamera._name);
+    
+    // set the current camera as active
+    currentCamera.setActive();
+    
    }
- 
-  
+   
+ //-----------------------------------------------------
+  private Camera getActiveCamera() {
+    Camera currentCamera = null; 
+    // loop through all cameras
+     for (int i = 0; i < cameras.size(); i++) {
+       Camera c = cameras.get(i);
+         if(c._isActive) {
+           currentCamera = c;
+         }
+     }
+     return currentCamera;
+  }
   /******************************************
    ----------------- helpers ----------------- 
   ******************************************/
   
-  //-----------------------------------------------------
+  //--------------------------------------------  --------
   // convert a string from XML into a float array
   //-----------------------------------------------------
   float[] toFloatArray(String string) {

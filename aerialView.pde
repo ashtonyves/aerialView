@@ -12,13 +12,15 @@ SceneManager manager;
 // background color
 color bg = color(70,70,70);
 PFont font;
-int padding = 50;
+float padding = 20;
 
 // hold all data from XML
 ArrayList<Camera> cameras;
 ArrayList<Actor> actors;
 ArrayList<Light> lights;
 ArrayList<Event> events;
+
+Camera currentCamera = null;
   
 // length of the scripted scene
 int FPS = 30;
@@ -63,6 +65,8 @@ void draw() {
 
   manager.setActiveCamera();
   
+  
+  
   timeline.drawTracks();
   timeline.drawPlayhead(CURRENTFRAME);
 
@@ -101,17 +105,15 @@ void keyPressed() {
   CURRENTFRAME = 0;
  }
  
- // two hands in frame - show the timeline
-  if(key== '2') {
-  isPositioningCamera = false;  
-  showTimeline = true;
-  showTracks = true;
- }
- 
+   // default -- no hands in frame. keep all as it was before, but allow playback
+  if(key== '0') {
+    isPositioningCamera = false;
+  }
+
  // one hand in frame - hide the timeline
   if(key== '1') {
   isPositioningCamera = true;
-  showTimeline = false;
+  //showTimeline = false;
   showTracks = false;
   // and stop the movie from playing, if it's playing
   // NOTE: this might not be the effect you want.
@@ -120,4 +122,14 @@ void keyPressed() {
     isPlaying = false;
   }
  }
+ 
+ // two hands in frame - show the timeline
+  if(key== '2') {
+  isPositioningCamera = false;  
+  showTimeline = true;
+  showTracks = true;
+ }
+ 
+  
+ 
 }
