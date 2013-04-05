@@ -21,7 +21,9 @@ ArrayList<Light> lights;
 ArrayList<Event> events;
 
 Camera currentCamera = null;
-  
+Camera previousCamera = null;
+Camera nextCamera = null;
+
 // length of the scripted scene
 int FPS = 30;
 int NUMFRAMES = 300;
@@ -63,7 +65,7 @@ void setup() {
 void draw() {
   background(bg);
 
-  manager.setActiveCamera();
+  manager.drawCameras();
   
   
   

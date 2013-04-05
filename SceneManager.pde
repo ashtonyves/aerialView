@@ -1,7 +1,6 @@
 public class SceneManager {
  
   String SCENEFILE = "guiscenedata.xml";
-
   
   // initialization values
   int activeCam = 0; // start active camera as the first one in the array
@@ -244,6 +243,11 @@ public class SceneManager {
      Collections.sort(cameras, new CustomComparator());
   }
 
+  void drawCameras() {
+    setActiveCamera();
+    setAdjacentCameras(); // this MUST come after setActiveCamera();
+  }
+  
   //-----------------------------------------------------
  void setActiveCamera() {
      //Camera currentCamera = null; 
@@ -275,12 +279,43 @@ public class SceneManager {
              currentCamera = cameras.get(i);
              break;
           }
+          
       }
     //println(currentCamera._name);
     
     // set the current camera as active
     currentCamera.setActive();
-    
+   }
+   
+ //-----------------------------------------------------  
+   void setAdjacentCameras() {
+     // loop through all cameras. COUNT DOWN!
+     if(cameras.size() <= 1) { // there are no previous or next cameras
+       previousCamera = null;
+       nextCamera = null; 
+       
+       // get out.
+       return; 
+     } else { // there is more than one camera
+       for (int i = 0; i < cameras.size(); i++) { // loop through them all.
+         Camera c = cameras.get(i);
+         if(c._isActive) { // find the active camera
+            if(i == 0)  { // if we are on the first camera
+              // so there are no cameras before it
+               previousCamera = null;
+             } else {
+               previousCamera = cameras.get(i-1);
+             }
+             if(i == cameras.size()-1) { // we are on the last camera
+               // so there are no cameras after it;
+               nextCamera = null;
+             } else {
+               nextCamera = cameras.get(i+1);
+             }
+              return;
+           }
+       }
+     }
    }
    
  //-----------------------------------------------------

@@ -78,10 +78,11 @@ public class Camera  {
          //TODO
          //triangle(xPos, cPos, xPos + 10, cPos, xPos+5, cPos+6); 
         }
-        
-         
-      
-       
+    }
+    
+    if(_isDisplayed) {
+      fill(255, 50);
+      ellipse(xPos, cPos, cDiameter, cDiameter);
     }
     
     if(_isViolating) {
