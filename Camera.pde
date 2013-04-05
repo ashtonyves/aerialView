@@ -13,6 +13,8 @@ import java.util.Comparator;
 
  
 public class Camera  {
+ int boxScale = 40;
+ 
   String  _name;       // MSB name (may be superfluous here) - use to identify selected cams with Kinect data
   int     _frame;
   FloatBuffer _transform;
@@ -98,7 +100,21 @@ public class Camera  {
   void drawInScene() {
     FloatBuffer fb  = getPosition(); // _transform
     // draw the camera icon depending on its status
-    
+    if(_isActive) {
+       // draw it
+     pushMatrix();
+      float[] matrix = _transform.array();
+
+      PMatrix3D m=new PMatrix3D();
+      m.set(matrix);
+      m.transpose();
+      applyMatrix(m);  
+
+      line(0, 0, 0, 0, 0, 50);
+      fill(255,20);
+      box(boxScale);
+      popMatrix();
+    }
     
     // and transform it using position matrix
    
@@ -167,6 +183,34 @@ public class Camera  {
    public float getFOV() {
      return _fov;
    }
+   //------------------------------------------------------
+    PVector getTranslation() {
+    if (_transform == null) {
+      println("Transform Matrix is corrupted");
+      return null;
+    }
+    float[] arr = _transform.array();
+    if (arr.length != 16) {
+      println("Transform Matrix is corrupted");
+      return null;
+    }
+    float[] translation = new float[3];
+    return new PVector(arr[12], arr[13], arr[14]);
+  }
+  
+  //------------------------------------------------------
+  PVector getZAxis() {
+    if (_transform == null) {
+      println("Transform Matrix is corrupted");
+      return null;
+    }
+    float[] arr = _transform.array();
+    if (arr.length != 16) {
+      println("Transform Matrix is corrupted");
+      return null;
+    }
+    return new PVector(arr[8], arr[9], arr[10]);    
+  }
   
 }
   

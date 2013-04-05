@@ -24,6 +24,12 @@ Camera currentCamera = null;
 Camera previousCamera = null;
 Camera nextCamera = null;
 
+/*
+float globalCameraX = 600;
+float globalCameraY = 530;//-200;
+float globalCameraZ = -336;
+*/
+
 // length of the scripted scene
 int FPS = 30;
 int NUMFRAMES = 300;
@@ -48,9 +54,12 @@ void setup() {
   
   // draw environment
   background(bg);
-  //size(displayWidth, displayHeight, P3D);
+  
+  //size(displayWidth, displayHeight, OPENGL);
   size(1080, 720, P3D);
-  smooth();
+  noStroke();
+  
+  smooth(4);
   
   //create the SceneManager
   manager = new SceneManager();
@@ -64,12 +73,13 @@ void setup() {
 
   //------------------------------------------------------
 void draw() {
+  //lights(); messes up transparency
+  resetMatrix();
+  camera();
+  // rotateX(HALF_PI);
+  //translate(globalCameraX, globalCameraY, globalCameraZ);
   background(bg);
-
-  manager.drawCameras();
-  
-  
-  
+  manager.drawCameras();  
   timeline.drawTracks();
   timeline.drawPlayhead(CURRENTFRAME);
 

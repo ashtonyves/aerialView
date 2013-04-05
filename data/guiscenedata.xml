@@ -5,7 +5,7 @@
 			<name>Actor1</name>
 			<label>Romeo</label>
 			<state frame="0">
-				<pos>0.1f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
+				<pos>0.0f 0.0f 0.0f 0.0f 0.0f 0.0f 0.0f 0.0f 0.7f 0.0f 0.7f 0.0f 20.0f 000.0f -10.0f 1f</pos>
 			</state>
 				<state frame="220">
 					<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -200.0f 1f</pos>
@@ -105,7 +105,7 @@
 		<node>
 			<name>Camera1</name>
 			<frame start="0"></frame>
-			<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
+			<pos>-1.0f 0.0f 0.0f 0.0f 0.0f 1.0f 0.0f 0.0f 0.0f 0.0f 1.0f 0.0f 400.0f 600.0f 0.0f 1.0f</pos>
 		</node>
 		<node>
 			<name>Camera2</name>

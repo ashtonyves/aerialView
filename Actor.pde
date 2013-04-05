@@ -19,7 +19,7 @@ public class Actor {
   float fov = 45;
   
   PShape icon;
-  
+  float charDim = 100;
   
  //----------CONSTRUCTORS--------------------------------------------
  public Actor(String name, String label, ArrayList<ActorState> states) {
@@ -35,7 +35,7 @@ public class Actor {
  
  public Actor(){
    _states = new ArrayList<ActorState>();
-   icon  = loadShape("actor.svg");
+   
  }
  
  // call after you update CURRENTFRAME
@@ -43,16 +43,20 @@ public class Actor {
    
    ActorState currentState = null; 
    // loop through all _states.
-   for (int i = 0; i < _states.size(); i ++) {
+   for (int i = _states.size()-1; i>=0; i--) {
+    
     ActorState s = _states.get(i);
      // compare each frame value to current frame
-    if (s.getFrame() < CURRENTFRAME) {
+     if(CURRENTFRAME == 0) {
+        currentState = _states.get(0);
+        break;
+    } else if (s.getFrame() < CURRENTFRAME) {
       // if it is less that the current frame, save it to the current state
        currentState = s;
-    } else {
-      if(CURRENTFRAME == 0) {
-        currentState = _states.get(0);
-      }
+       break;
+    }
+   }
+     
       // we have the right state saved to currentState from the previous iteration
       // so draw the character from this state
       FloatBuffer fb = currentState.getPosition();
@@ -61,20 +65,21 @@ public class Actor {
       float xPos = thisMatrix[12];
       float yPos = thisMatrix[14];
       
+      pushMatrix();
+      translate(xPos,-yPos);
+      sphere(20);
+      popMatrix();
       
       //TODO: rotation?!
       
-      //println("actor's current state. FRAME: " + currentState.getFrame() + " POSITION: (x=" + xPos + ", y=" + -yPos + ")");
+      //println("actor " + _name + " current state. FRAME: " + currentState.getFrame() + " POSITION: (x=" + xPos + ", y=" + -yPos + ")");
       //pushMatrix();
       //rotateY(acos(thisMatrix[0])); // WEIRD! WAY TO ROTATE....
-      shape(icon, xPos, -yPos);
+      
+      //shape(icon, xPos, -yPos);
       //popMatrix();
-      break;
-    }
+      //break;
     
-    
-   }
-   
    
  }
  
