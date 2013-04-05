@@ -1,9 +1,21 @@
+/**
+ *  SceneManager
+ * 
+ * responsible for adding, deleteing cameras,
+ * sorting camera array to set active and adjacent camera
+ * and initializing objects from XML data when the program loads.
+ * 
+ * Does not draw to convas on its own, but 
+ * calls the object classes to draw actual objects from all elements 
+ * in the camera, actors, lights and events arrays
+ *  
+ * All draw functions in the main draw() function should be run through SceneManager first.
+ *  
+*/
+
 public class SceneManager {
  
-  String SCENEFILE = "guiscenedata.xml";
-  
-  // initialization values
-  int activeCam = 0; // start active camera as the first one in the array
+  String SCENEFILE = "guiscenedata.xml"; 
   
    //----------CONSTRUCTOR-------------------------------------------- 
   SceneManager() {
@@ -274,7 +286,7 @@ public class SceneManager {
            }
            // Otherwise, 
            // compare value of CURRENTFRAME to all startFrames in cameras array.
-          else if(c.getFrame() < CURRENTFRAME) {
+          else if(c.getFrame() <= CURRENTFRAME) {
             // if the camera's start frame is greater than the current frame, 
             // then the camera before that must be currently active.
              currentCamera = cameras.get(i);
@@ -322,6 +334,41 @@ public class SceneManager {
      }
    }
    
+   //-----------------------------------------------------
+   private void deleteCamera() {
+     
+     int pos = getActiveCameraKey();
+     if(pos != 0) {
+         cameras.remove(pos);
+     } else {
+       // TODO: make this a notification on the UI
+       
+       println("you cannot delete the first camera");
+       return;
+     }
+     
+     currentCamera = null;  
+     sortCameras();
+   }
+   
+      //-----------------------------------------------------
+   private void addCamera() {
+     
+     Camera c = getActiveCamera();
+    
+     // add a camera at the currentFrame, with a transform matrix copied from the camera before it
+     Camera newCam = new Camera(CURRENTFRAME, (c.getPosition()).array()); 
+     cameras.add(newCam);  
+     
+     sortCameras();
+       // TESTING
+      println(" ");
+      println("---------------CAMERA ADDED------------------");
+      println(newCam.getName()); 
+      println("Camera added at FRAME "  + newCam.getFrame() + " at POSITION " + bufferToString(newCam.getPosition()) );
+   }
+   
+   
  //-----------------------------------------------------
   private Camera getActiveCamera() {
     Camera currentCamera = null; 
@@ -334,6 +381,20 @@ public class SceneManager {
      }
      return currentCamera;
   }
+ 
+  //-----------------------------------------------------
+  private int getActiveCameraKey() {
+    int k = -1;
+     for (int i = 0; i < cameras.size(); i++) {
+       Camera c = cameras.get(i);
+         if(c._isActive) {
+            k = i;
+            break;
+         }
+     }
+     return k;
+  }
+  
   /******************************************
    ----------------- helpers ----------------- 
   ******************************************/

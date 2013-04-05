@@ -107,6 +107,16 @@ void keyPressed() {
   CURRENTFRAME = 0;
  }
  
+ // - DELETE CAMERA
+ if (keyCode == 45) {
+   manager.deleteCamera();  
+ }
+ 
+ // + ADD CAMERA
+ if (keyCode == 61) {
+   manager.addCamera(); 
+ }
+ 
    // default -- no hands in frame. keep all as it was before, but allow playback
   if(key== '0') {
     isPositioningCamera = false;

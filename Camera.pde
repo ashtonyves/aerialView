@@ -163,7 +163,7 @@ public class Camera  {
    public FloatBuffer getPosition() {
      return _transform;
    }
-   
+   //------------------------------------------------------
    public float getFOV() {
      return _fov;
    }

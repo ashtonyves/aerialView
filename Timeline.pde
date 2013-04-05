@@ -95,14 +95,12 @@ public class Timeline {
       pushMatrix();
       translate(padding, bottomTrackGroup2);
       rotate(-PI/2);
-      rect(0, 0, (numEventTracks)*(5 + trackHeight), padding);
       translate((numEventTracks*(5 + trackHeight))/2, 0);
       textAlign(CENTER,CENTER);
       fill(255);
       text("EVENTS", 0, 0); 
       noFill();
-      translate(-padding, -bottomTrackGroup2);
-      
+      translate(-padding, -bottomTrackGroup2); 
       popMatrix();
     
     for(int i=numEventTracks; i>0; i--) {
@@ -116,17 +114,11 @@ public class Timeline {
       
       // draw labels
       fill(255,255,255, 30);
-      /*ellipse(
-        padding + (labelWidth/2),
-        bottomTrackGroup2 - ((i)*(5 + trackHeight)) + ((5+trackHeight - 15)/2),
-        trackHeight - 15,
-        trackHeight - 15
-      );
-      */
+     
       fill(0);
-      textAlign(CENTER, CENTER);
+      textAlign(TOP, LEFT);
       textSize(24);
-      text(i, (padding + labelWidth/2), bottomTrackGroup2 - (((numEventTracks+1)-i)*(5 + trackHeight)) + ((5+trackHeight - 15)/2));
+      text(i, x, bottomTrackGroup2 - (((numEventTracks+1)-i)*(5 + trackHeight)) + ((5+trackHeight - 15)/2));
      }
      noFill();
     }
