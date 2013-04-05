@@ -96,7 +96,6 @@ public class Camera  {
     strokeWeight(1);
 }
   //------------------------------------------------------
-  // TODO (see Cam.display())
   void drawInScene() {
     FloatBuffer fb  = getPosition(); // _transform
     // draw the camera icon depending on its status
@@ -111,7 +110,7 @@ public class Camera  {
       applyMatrix(m);  
 
       line(0, 0, 0, 0, 0, 50);
-      fill(255,20);
+      fill(0,80);
       box(boxScale);
       popMatrix();
     }

@@ -73,17 +73,17 @@ void setup() {
 
   //------------------------------------------------------
 void draw() {
-  //lights(); messes up transparency
   resetMatrix();
   camera();
   // rotateX(HALF_PI);
   //translate(globalCameraX, globalCameraY, globalCameraZ);
   background(bg);
-  manager.drawCameras();  
   timeline.drawTracks();
   timeline.drawPlayhead(CURRENTFRAME);
-
+  manager.drawCameras();  
   manager.drawScene();
+  
+ 
   
   if(isPlaying) {
     if(CURRENTFRAME < NUMFRAMES) {

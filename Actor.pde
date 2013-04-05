@@ -13,13 +13,10 @@ public class Actor {
   String _name;
   String _label;
   FloatBuffer _currentPosition;
-  
   ArrayList<ActorState> _states;
-  
   float fov = 45;
   
-  PShape icon;
-  float charDim = 100;
+  float charDim = 40;
   
  //----------CONSTRUCTORS--------------------------------------------
  public Actor(String name, String label, ArrayList<ActorState> states) {
@@ -28,14 +25,10 @@ public class Actor {
    _name = name;
    _label = label;
    _states = states;
-   
-   icon  = loadShape("actor.svg");
-   
  }
  
  public Actor(){
    _states = new ArrayList<ActorState>();
-   
  }
  
  // call after you update CURRENTFRAME
@@ -67,7 +60,7 @@ public class Actor {
       
       pushMatrix();
       translate(xPos,-yPos);
-      sphere(20);
+      ellipse(0,0,charDim,charDim);
       popMatrix();
       
       //TODO: rotation?!
