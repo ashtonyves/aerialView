@@ -48,7 +48,8 @@ void setup() {
   
   // draw environment
   background(bg);
-  size(displayWidth, displayHeight, P3D);
+  //size(displayWidth, displayHeight, P3D);
+  size(1080, 720, P3D);
   smooth();
   
   //create the SceneManager

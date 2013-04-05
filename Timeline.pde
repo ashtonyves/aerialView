@@ -14,15 +14,15 @@ public class Timeline {
   float labelWidth = 50;
   
   float x = labelWidth;
-  float width = displayWidth - (2*padding) - labelWidth;
-  float xEnd = width + x;  
+  float frameWidth = width - (2*padding) - labelWidth;
+  float xEnd = frameWidth + x;  
   
   // trackHeights
   float timelineHeight = 50;
   float trackHeight = 50;
   
   // bottom y values for track groups
-  float topTimeline = displayHeight-timelineHeight;
+  float topTimeline = height-timelineHeight;
   float bottomTrackGroup1 = topTimeline - 30; 
   float bottomTrackGroup2 = 0.0;
   
@@ -49,10 +49,10 @@ public class Timeline {
   //------------------------------------------------------
   void drawTimeline() {
     if(showTimeline) {
-      line(x, topTimeline + (timelineHeight/2), x + width, topTimeline + (timelineHeight/2));
+      line(x, topTimeline + (timelineHeight/2), x + frameWidth, topTimeline + (timelineHeight/2));
       //endcaps
       line(x, topTimeline, x, height);
-      line(x+width, topTimeline, x+width, height);
+      line(x+frameWidth, topTimeline, x+frameWidth, height);
     }
   }
   
@@ -61,7 +61,7 @@ public class Timeline {
     if(showTimeline) {
       
       stroke(255);
-      float xPos = map(pos, 0, NUMFRAMES, x, x+width);
+      float xPos = map(pos, 0, NUMFRAMES, x, x+frameWidth);
       
       if(showTracks) {
         line(xPos, height, xPos, bottomTrackGroup2 - ((numEventTracks) * (5 + trackHeight)));
@@ -80,7 +80,7 @@ public class Timeline {
       rect(
         x, 
         bottomTrackGroup1 - ((i + 1) * (5 + trackHeight)), 
-        width, 
+        frameWidth, 
         trackHeight);
     }
    }
@@ -109,7 +109,7 @@ public class Timeline {
       rect(
         x, 
         bottomTrackGroup2 - ((i)*(5 + trackHeight)),  
-        width, 
+        frameWidth, 
         trackHeight);
       
       // draw labels
@@ -138,11 +138,11 @@ public class Timeline {
   }
   //------------------------------------------------------
   public void setWidth(float newWidth) {
-    width = newWidth;
+    frameWidth = newWidth;
   }
   //------------------------------------------------------
  public float getWidth() {
-   return width;
+   return frameWidth;
  }
  //------------------------------------------------------
  public float getTrackHeight() {
