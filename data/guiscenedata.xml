@@ -105,22 +105,22 @@
 		<node>
 			<name>Camera1</name>
 			<frame start="0"></frame>
-			<pos>-1.0f 0.0f 0.0f 0.0f 0.0f 1.0f 0.0f 0.0f 0.0f 0.0f 1.0f 0.0f 400.0f 600.0f 0.0f 1.0f</pos>
+			<pos>1.0f 0.0f 0.0f 0.0f 0.0f 1.0f 0.0f 0.0f 0.0f 0.0f 1.0f 0.0f 300.0f 230.0f 0.0f 1.0f</pos>
 		</node>
 		<node>
 			<name>Camera2</name>
 			<frame start="40"></frame>
-			<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
+			<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 20.0f -100.0f 1f</pos>
 		</node>	
 			<node>
 				<name>Camera3</name>
 				<frame start="100"></frame>
-				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
+				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 670.0f 800.0f -100.0f 1f</pos>
 			</node>
 			<node>
 				<name>Camera4</name>
 				<frame start="120"></frame>
-				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 000.0f -100.0f 1f</pos>
+				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 60.0f -100.0f 1f</pos>
 			</node>	
 	</cameras>
 </objects>

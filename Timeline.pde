@@ -58,9 +58,10 @@ public class Timeline {
   
   //------------------------------------------------------
   void drawPlayhead(int pos) {
+    stroke(255);
+    
     if(showTimeline) {
-      
-      stroke(255);
+
       float xPos = map(pos, 0, NUMFRAMES, x, x+frameWidth);
       
       if(showTracks) {
@@ -72,9 +73,10 @@ public class Timeline {
   }
   //------------------------------------------------------
   void drawLightTracks() {
-   if(showTracks) {
-    noStroke();
+   noStroke();
     fill(0, 144, 144, 60);
+    if(showTracks) {
+    
     
     for(int i=0; i<numLightTracks; i++) {
       rect(
@@ -88,40 +90,36 @@ public class Timeline {
   
   //------------------------------------------------------
   void drawEventTracks() {
-   if(showTracks) {
-      noStroke();
-      
+   noStroke();
+   fill(255);
+    if(showTracks) {
       textSize(24);
       pushMatrix();
       translate(padding, bottomTrackGroup2);
       rotate(-PI/2);
       translate((numEventTracks*(5 + trackHeight))/2, 0);
       textAlign(CENTER,CENTER);
-      fill(255);
       text("EVENTS", 0, 0); 
-      noFill();
       translate(-padding, -bottomTrackGroup2); 
       popMatrix();
     
     for(int i=numEventTracks; i>0; i--) {
       // draw tracks
-      fill(144,144,144, 60+(i*20));
+      fill(255, 100-(i*10));
       rect(
         x, 
         bottomTrackGroup2 - ((i)*(5 + trackHeight)),  
         frameWidth, 
         trackHeight);
-      
-      // draw labels
-      fill(255,255,255, 30);
-     
-      fill(0);
+
+      fill(255, 100);
       textAlign(TOP, LEFT);
       textSize(24);
       text(i, x, bottomTrackGroup2 - (((numEventTracks+1)-i)*(5 + trackHeight)) + ((5+trackHeight - 15)/2));
      }
-     noFill();
+     
     }
+    
   }
   
 

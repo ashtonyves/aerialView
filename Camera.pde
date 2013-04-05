@@ -114,6 +114,19 @@ public class Camera  {
       box(boxScale);
       popMatrix();
     }
+    if (_isDisplayed) {
+      pushMatrix();  
+      float[] matrix = _transform.array();
+         PMatrix3D m=new PMatrix3D();
+      m.set(matrix);
+      m.transpose();
+      applyMatrix(m);  
+
+      line(0, 0, 0, 0, 0, 50);
+      fill(255,80);
+      box(boxScale);
+      popMatrix();
+    }
     
     // and transform it using position matrix
    

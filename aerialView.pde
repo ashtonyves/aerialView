@@ -75,7 +75,7 @@ void setup() {
 void draw() {
   resetMatrix();
   camera();
-  // rotateX(HALF_PI);
+  //rotateX(HALF_PI);
   //translate(globalCameraX, globalCameraY, globalCameraZ);
   background(bg);
   timeline.drawTracks();
