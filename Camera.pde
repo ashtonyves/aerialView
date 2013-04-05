@@ -71,7 +71,7 @@ public class Camera  {
       
     if(_isActive) {
       // ACTIVE CAMERA STYLE
-      fill(255);
+      fill(0);
       ellipse(xPos, cPos, cDiameter, cDiameter);
       
        if(_isSelectedForPositionInSpace || _isSelectedForPositionInTime) {
@@ -81,7 +81,7 @@ public class Camera  {
     }
     
     if(_isDisplayed) {
-      fill(255, 50);
+      fill(255);
       ellipse(xPos, cPos, cDiameter, cDiameter);
     }
     
@@ -89,9 +89,7 @@ public class Camera  {
       fill(255, 0, 0, 50);
       ellipse(xPos, cPos, cDiameter, cDiameter);
     }
-    
-   
-    
+
     // reset stroke weight
     strokeWeight(1);
 }
@@ -127,8 +125,13 @@ public class Camera  {
   }
   //------------------------------------------------------
   public void setActive() {
-    this._isActive = true;
+    _isActive = true;
   } 
+  //------------------------------------------------------
+  public void setDisplayed() {
+    _isDisplayed = true;
+  } 
+  
   //------------------------------------------------------
   public void setViolating() {
     _isViolating = true;

@@ -242,24 +242,25 @@ public class SceneManager {
   void sortCameras() {
      Collections.sort(cameras, new CustomComparator());
   }
-
+  
+  //-----------------------------------------------------
   void drawCameras() {
+    
+    // IMPORTANT -- CAMERAS MUST BE SORTED BEFORE RUNNING THIS FUNCTION
+    
+     // first set all cameras to inactive and notdisplayed
+    for (int i = 0; i < cameras.size(); i++) {
+      Camera c = cameras.get(i);
+      c._isActive = false;
+      c._isDisplayed = false;
+    }
+    // then reset active and adjacent cameras
     setActiveCamera();
     setAdjacentCameras(); // this MUST come after setActiveCamera();
   }
   
   //-----------------------------------------------------
- void setActiveCamera() {
-     //Camera currentCamera = null; 
-     // IMPORTANT -- CAMERAS MUST BE SORTED BEFORE RUNNING THIS FUNCTION
-    
-    // first set all cameras to inactive
-    for (int i = 0; i < cameras.size(); i++) {
-      //println("camera " + i);
-      Camera c = cameras.get(i);
-      c._isActive = false;
-    }
-
+  void setActiveCamera() {
      // loop through all cameras. COUNT DOWN!
      for (int i = cameras.size()-1; i>=0; i--) {
           Camera c = cameras.get(i);
@@ -289,13 +290,14 @@ public class SceneManager {
    
  //-----------------------------------------------------  
    void setAdjacentCameras() {
-     // loop through all cameras. COUNT DOWN!
+     
      if(cameras.size() <= 1) { // there are no previous or next cameras
        previousCamera = null;
        nextCamera = null; 
        
-       // get out.
+       // then get out.
        return; 
+       
      } else { // there is more than one camera
        for (int i = 0; i < cameras.size(); i++) { // loop through them all.
          Camera c = cameras.get(i);
@@ -305,12 +307,14 @@ public class SceneManager {
                previousCamera = null;
              } else {
                previousCamera = cameras.get(i-1);
+               previousCamera.setDisplayed();
              }
              if(i == cameras.size()-1) { // we are on the last camera
                // so there are no cameras after it;
                nextCamera = null;
              } else {
                nextCamera = cameras.get(i+1);
+               nextCamera.setDisplayed();
              }
               return;
            }
