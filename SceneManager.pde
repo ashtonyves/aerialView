@@ -341,8 +341,8 @@ public class SceneManager {
      if(pos != 0) {
          cameras.remove(pos);
      } else {
-       // TODO: make this a notification on the UI
        
+       // TODO: make this a notification on the UI
        println("you cannot delete the first camera");
        return;
      }
@@ -364,6 +364,30 @@ public class SceneManager {
        // TESTING
       println(" ");
       println("---------------CAMERA ADDED------------------");
+      println(newCam.getName()); 
+      println("Camera added at FRAME "  + newCam.getFrame() + " at POSITION " + bufferToString(newCam.getPosition()) );
+   }
+   
+    //-----------------------------------------------------
+   // from OSC message (overloaded function)
+   private void addCamera(int id, int frame) { // this prints out some craaaazy values (memory values, I think)
+     
+     //print("id passed in ");
+     //println(id);
+     println(frame);
+     
+     Camera c = getActiveCamera();
+     String name = "Camera" + id;
+     // add a camera at the currentFrame, with a transform matrix copied from the camera before it
+     Camera newCam = new Camera(frame, (c.getPosition()).array(), name); 
+     cameras.add(newCam);  
+     
+     
+     
+     sortCameras();
+       // TESTING
+      println(" ");
+      println("---------------CAMERA ADDED WITH ID------------------");
       println(newCam.getName()); 
       println("Camera added at FRAME "  + newCam.getFrame() + " at POSITION " + bufferToString(newCam.getPosition()) );
    }

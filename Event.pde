@@ -74,7 +74,7 @@ private class Event {
  }
   //------------------------------------------------------
   public int getEndFrame() {
-   return _startFrame;
+   return _endFrame;
  }
   //------------------------------------------------------
  public void setEndFrame(int end) {

@@ -38,6 +38,13 @@ public class Camera  {
     _frame = frame;
   }
   
+    public Camera(int frame, float[] transform, String name) {
+    _transform = FloatBuffer.allocate(16);
+    _transform.put(transform);
+    _frame = frame;
+    _name = name;
+  }
+  
   public Camera() {
     _transform = FloatBuffer.allocate(16);
   }
@@ -88,8 +95,10 @@ public class Camera  {
     }
     
     if(_isViolating) {
-      fill(255, 0, 0, 50);
+      stroke(255, 0, 0);
+      strokeWeight(2);
       ellipse(xPos, cPos, cDiameter, cDiameter);
+      noStroke(); // uncomment to also stroke the camera in the scene
     }
 
     // reset stroke weight

@@ -2,12 +2,9 @@ import oscP5.*;
 import netP5.*;
 import java.util.Arrays;
 
-OscP5 oscP5;
-int port = 31842;
-NetAddress interfaceAddr;
-
 Timeline timeline;
 SceneManager manager;
+Pilot pilot;
 
 // background color
 color bg = color(70,70,70);
@@ -24,11 +21,11 @@ Camera currentCamera = null;
 Camera previousCamera = null;
 Camera nextCamera = null;
 
-/*
+
 float globalCameraX = 600;
 float globalCameraY = 530;//-200;
 float globalCameraZ = -336;
-*/
+
 
 // length of the scripted scene
 int FPS = 30;
@@ -41,33 +38,30 @@ boolean isPositioningCamera = false;
 // show timeline and tracks to start
 boolean showTimeline = true;
 boolean showTracks = true;
+boolean showErrors = false;
 
-
+PImage ic_alert;
 
   //------------------------------------------------------
 void setup() {
-  
-  font = loadFont("AbadiMT-CondensedLight-24.vlw");
-  textFont(font);
   
   frameRate(FPS);
   
   // draw environment
   background(bg);
-  
-  //size(displayWidth, displayHeight, OPENGL);
-  size(1080, 720, P3D);
+  font = loadFont("AbadiMT-CondensedLight-24.vlw");
+  textFont(font);
+  size(1280, 720, OPENGL);
   noStroke();
-  
   smooth(4);
   
   //create the SceneManager
   manager = new SceneManager();
   timeline = new Timeline();
+  pilot = new Pilot();
   
-  oscP5 = new OscP5(this, port);
-  // spoof OSC messages to yourself
-  interfaceAddr = new NetAddress("127.0.0.1", port);
+  // move to error class. load once.
+  ic_alert = loadImage("ic_alert.png");
 
 }
 
@@ -75,6 +69,9 @@ void setup() {
 void draw() {
   resetMatrix();
   camera();
+
+
+
   //rotateX(HALF_PI);
   //translate(globalCameraX, globalCameraY, globalCameraZ);
   background(bg);
@@ -83,8 +80,11 @@ void draw() {
   manager.drawCameras();  
   manager.drawScene();
   
- 
-  
+
+  // TODO: put into error class
+  drawErrorVisualizations();  
+  drawErrorMessage();
+   
   if(isPlaying) {
     if(CURRENTFRAME < NUMFRAMES) {
       CURRENTFRAME++;
@@ -96,6 +96,54 @@ void draw() {
 
 }
 
+/****************************************** refactor into  own class ErrorManager ********************/
+void drawErrorVisualizations() {
+  // simulate cutting on action
+  if(showErrors == true) {
+     noStroke();
+     fill(color(255,0,0), 40);
+     stroke(color(255,0,0));
+     
+     // should be detected through AI logic, not hardcoded to the star and end frame of a particular event
+     float violationFrame1 = events.get(0).getEndFrame(); // frame where overlapping shot 2 begins
+     float violationFrame2 = events.get(1).getStartFrame(); // frame where overlapping 1 shots ends
+     float intersect1 = map(violationFrame1-15, 0, NUMFRAMES, timeline.x, timeline.x+timeline.frameWidth);
+     float intersect2 =  map(violationFrame2-15, 0, NUMFRAMES, timeline.x, timeline.x+timeline.frameWidth);
+     float vioWidth = map(30, 0, NUMFRAMES, 0, timeline.frameWidth);
+     
+     rect(intersect1, height, vioWidth, -400);
+     rect(intersect2, height, vioWidth, -400);
+  }
+
+}
+
+void drawErrorMessage() {
+  if (showErrors == true) {
+  // error area in top right corner
+  fill(color(255,0,0), 60);
+  int errorX = width - 400;
+  int errorY = 20;
+  int errorHeight = 80;
+  int errorWidth = 380; 
+  int padding = 5;
+  noFill();
+  
+  fill(255);
+  String errorTitle = "Cutting on Action"; // title
+  String errorDescription = "Two events with the same actor overlap. Scrub the camera outside the red area to seamlessly cut on action. Or, point the camera away from this character.";
+  String errorMessage = errorTitle + "\n" + errorDescription;
+  textSize(15);
+  text(errorMessage, 
+    errorX + padding, 
+    errorY + padding, 
+    errorWidth - padding, 
+    errorHeight - padding);
+  image(ic_alert, 
+    errorX - 20,
+    errorY + 30);
+  } 
+}
+/****************************************** end refactoring ********************/
 
 //**********************************************************
 // dummy OSC messages
@@ -153,6 +201,22 @@ void keyPressed() {
   showTracks = true;
  }
  
-  
+ 
+ // simulate Cutting on Action Violation
+  if(key== 'v') {
+  if (showTracks == true) {
+    if(showErrors == true) {
+      showErrors = !showErrors;
+      if(cameras.size() > 3 ) {
+       cameras.get(3)._isViolating = false; // Hey Rule Checker, check that this camera is violating on every frame. Else it will remain red.
+      } 
+    } else {
+     showErrors = true;
+    if(cameras.size() > 3 ) {
+     cameras.get(3).setViolating(); // Hey Rule Checker, check that this camera is violating on every frame. Else it will remain red.
+    }  
+   } 
+  }
+  }
  
 }

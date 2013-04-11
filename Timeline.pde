@@ -49,6 +49,7 @@ public class Timeline {
   //------------------------------------------------------
   void drawTimeline() {
     if(showTimeline) {
+      stroke(1);
       line(x, topTimeline + (timelineHeight/2), x + frameWidth, topTimeline + (timelineHeight/2));
       //endcaps
       line(x, topTimeline, x, height);
