@@ -13,7 +13,7 @@ import java.util.Comparator;
 
  
 public class Camera  {
- int boxScale = 40;
+ int boxScale = 4;
  
   String  _name;       // MSB name (may be superfluous here) - use to identify selected cams with Kinect data
   int     _frame;

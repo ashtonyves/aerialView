@@ -69,7 +69,8 @@ void setup() {
 void draw() {
   resetMatrix();
   camera();
-
+  rotateX(HALF_PI);
+  translate(globalCameraX, globalCameraY, globalCameraZ);
 
 
   //rotateX(HALF_PI);

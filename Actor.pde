@@ -16,7 +16,7 @@ public class Actor {
   ArrayList<ActorState> _states;
   float fov = 45;
   
-  float charDim = 40;
+  float charDim = 4;
   
  //----------CONSTRUCTORS--------------------------------------------
  public Actor(String name, String label, ArrayList<ActorState> states) {
