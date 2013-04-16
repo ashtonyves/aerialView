@@ -59,8 +59,13 @@ public class Actor {
       float yPos = thisMatrix[14];
       
       pushMatrix();
-      translate(xPos,-yPos);
-      ellipse(0,0,charDim,charDim);
+      //translate(xPos,-yPos);
+      // rotate global cam each time you draw a new camera. inside the push matrix.
+      rotateGlobalCamera();
+      translate(xPos,yPos);
+      
+      //ellipse(0,0,charDim,charDim);
+      sphere(2);
       popMatrix();
       
       //TODO: rotation?!

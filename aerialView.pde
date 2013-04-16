@@ -21,11 +21,15 @@ Camera currentCamera = null;
 Camera previousCamera = null;
 Camera nextCamera = null;
 
+/*
+float globalCameraX = 600;
+float globalCameraY = 530;//-200;
+float globalCameraZ = -336;
+*/
 
 float globalCameraX = 600;
 float globalCameraY = 530;//-200;
 float globalCameraZ = -336;
-
 
 // length of the scripted scene
 int FPS = 30;
@@ -69,18 +73,18 @@ void setup() {
 void draw() {
   resetMatrix();
   camera();
+  /*
   rotateX(HALF_PI);
   translate(globalCameraX, globalCameraY, globalCameraZ);
-
-
-  //rotateX(HALF_PI);
-  //translate(globalCameraX, globalCameraY, globalCameraZ);
+*/
+  
   background(bg);
-  timeline.drawTracks();
-  timeline.drawPlayhead(CURRENTFRAME);
+  
   manager.drawCameras();  
   manager.drawScene();
   
+  timeline.drawTracks();
+  timeline.drawPlayhead(CURRENTFRAME);
 
   // TODO: put into error class
   drawErrorVisualizations();  
@@ -95,6 +99,11 @@ void draw() {
     isPlaying = false;
   }
 
+}
+
+void rotateGlobalCamera() {
+  rotateX(HALF_PI);
+  translate(globalCameraX, globalCameraY, globalCameraZ);
 }
 
 /****************************************** refactor into  own class ErrorManager ********************/

@@ -54,7 +54,7 @@ public class Camera  {
     VISUALIZE OBJECT ON SCREEN 
   *****************************************************************/
   void draw() {
-      drawOnTimeline();   // always
+      drawOnTimeline();   // always      
       drawInScene();      // only if its one of the three cameras
   }
   
@@ -111,28 +111,38 @@ public class Camera  {
     if(_isActive) {
        // draw it
      pushMatrix();
+     
+      // rotate global cam each time you draw a new camera. inside the push matrix.
+      rotateGlobalCamera();
+      
       float[] matrix = _transform.array();
 
       PMatrix3D m=new PMatrix3D();
+      
       m.set(matrix);
       m.transpose();
       applyMatrix(m);  
-
-      line(0, 0, 0, 0, 0, 50);
+      strokeWeight(1);
+      line(0, 0, 0, 0, 0, 15);
       fill(0,80);
+      noStroke();
       box(boxScale);
       popMatrix();
     }
     if (_isDisplayed) {
       pushMatrix();  
+      // rotate global cam each time you draw a new camera. inside the push matrix.
+      rotateGlobalCamera();
+      
       float[] matrix = _transform.array();
          PMatrix3D m=new PMatrix3D();
       m.set(matrix);
       m.transpose();
       applyMatrix(m);  
-
-      line(0, 0, 0, 0, 0, 50);
+      strokeWeight(1);
+      line(0, 0, 0, 0, 0, 5);
       fill(255,80);
+      noStroke();
       box(boxScale);
       popMatrix();
     }
