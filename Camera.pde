@@ -150,7 +150,7 @@ public class Camera  {
     // and transform it using position matrix
    
    if(_isSelectedForPositionInSpace) {
-     // display it as selecte
+     // display it as selected
    }
     
   }

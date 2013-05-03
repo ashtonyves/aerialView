@@ -91,7 +91,7 @@ public class Timeline {
   }
   
   //------------------------------------------------------
-  void drawEventTracks() {
+  void drawEventTracks() { // draw the tracks, not the actual events on the tracks themselves.
    noStroke();
    fill(255);
     if(showTracks) {

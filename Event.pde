@@ -46,9 +46,6 @@ private class Event {
    
     String s = _label;
   
-  
-
-  
    fill(44, 100);
    noStroke();
    rect(start, y, width, height);

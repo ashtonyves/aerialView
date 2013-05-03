@@ -38,6 +38,9 @@ int CURRENTFRAME = 0; // start at 0
 
 boolean isPlaying = false;
 boolean isPositioningCamera = false;
+boolean prevIsPositioningCamera;
+
+int numHandsInFrame = 0;
 
 // show timeline and tracks to start
 boolean showTimeline = true;
@@ -77,9 +80,24 @@ void draw() {
   rotateX(HALF_PI);
   translate(globalCameraX, globalCameraY, globalCameraZ);
 */
-  
   background(bg);
   
+  // if the number of hands in the frame is 1,
+  // then we are "positioning the camera"
+  if(numHandsInFrame == 1) {
+    isPositioningCamera = true;
+  }
+  else {
+    isPositioningCamera = false;  
+  }
+  // and if we are positioning the camera
+  // we don't want to show the Event tracks
+  if(isPositioningCamera) {
+    showTracks = false;
+  } else {
+    showTracks = true;
+  }
+
   manager.drawCameras();  
   manager.drawScene();
   
@@ -90,6 +108,7 @@ void draw() {
   drawErrorVisualizations();  
   drawErrorMessage();
    
+  // advance the playhead if we are playing
   if(isPlaying) {
     if(CURRENTFRAME < NUMFRAMES) {
       CURRENTFRAME++;
@@ -99,6 +118,8 @@ void draw() {
     isPlaying = false;
   }
 
+  prevIsPositioningCamera = isPositioningCamera;
+  isPositioningCamera = false;
 }
 
 void rotateGlobalCamera() {
@@ -114,7 +135,7 @@ void drawErrorVisualizations() {
      fill(color(255,0,0), 40);
      stroke(color(255,0,0));
      
-     // should be detected through AI logic, not hardcoded to the star and end frame of a particular event
+     // should be detected through AI logic, not hardcoded to the start and end frame of a particular event
      float violationFrame1 = events.get(0).getEndFrame(); // frame where overlapping shot 2 begins
      float violationFrame2 = events.get(1).getStartFrame(); // frame where overlapping 1 shots ends
      float intersect1 = map(violationFrame1-15, 0, NUMFRAMES, timeline.x, timeline.x+timeline.frameWidth);

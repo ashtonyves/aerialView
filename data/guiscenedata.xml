@@ -51,7 +51,7 @@
 
 	<events>
 		<node>
-			<label>Run to door</label>
+			<label>Run to boulder</label>
 			<duration start="0" end="120" />
 			<relevence>3</relevence>
 			<actors>
@@ -59,7 +59,7 @@
 			</actors>
 		</node>
 		<node>
-			<label>Step on cat</label>
+			<label>Spy on ogre</label>
 			<duration start="70" end="140" />
 			<relevence>2</relevence>
 			<actors>
@@ -67,7 +67,7 @@
 			</actors>
 		</node>
 		<node>
-			<label>Jump Out Window</label>
+			<label>Chase hero</label>
 			<duration start="180" end="260" />
 			<relevence>1</relevence>
 			<actors>
@@ -75,7 +75,7 @@
 			</actors>
 		</node>
 		<node>
-			<label>Fall to Ground</label>
+			<label>Trip on Stump</label>
 			<duration start="265" end="300" />
 			<relevence>2</relevence>
 			<actors>
@@ -91,7 +91,7 @@
 			<frame start="0"></frame>
 			<pos>1.0f 0.0f 0.0f 0.0f 0.0f 1.0f 0.0f 0.0f 0.0f 0.0f 1.0f 0.0f 300.0f 230.0f 0.0f 1.0f</pos>
 		</node>
-		<node>
+	<!--	<node>
 			<name>Camera2</name>
 			<frame start="40"></frame>
 			<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 20.0f -100.0f 1f</pos>
@@ -105,6 +105,6 @@
 				<name>Camera4</name>
 				<frame start="120"></frame>
 				<pos>0.7f 0.0f 0.7f 0.0f 0.0f 1.0f 0.0f 0.0f 0.7f 0.0f -0.7f 0.0f 100.0f 60.0f -100.0f 1f</pos>
-			</node>	
+			</node>	 -->
 	</cameras>
 </objects>
